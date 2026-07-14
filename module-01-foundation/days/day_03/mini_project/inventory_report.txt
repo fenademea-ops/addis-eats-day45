@@ -1,0 +1,6 @@
+=== PHARMACY INVENTORY REPORT ===
+Medicine        | Price      | Quantity  
+------------------------------------------
+Paracetamol     | 5.50       | 100       
+Amoxicillin     | 12.00      | 50        
+Ibuprofen       | 8.25       | 75        
