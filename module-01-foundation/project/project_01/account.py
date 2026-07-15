@@ -3,77 +3,74 @@
 # =====================================================================
 
 class Account:
-    # Step 1: Define Account with owner, account_number, and private __balance
-    def __init__(self, owner: str, account_number: str, initial_balance: float = 0.0):
+    # Requirement: Define Account with owner, number, and private __balance (default 0)
+    def __init__(self, owner, number, balance=0):
         self.owner = owner
-        self.account_number = account_number
+        self.account_number = number
         
-        if initial_balance < 0:
-            print(f"Warning: Initial balance for {self.owner} cannot be negative. Setting to 0.0 ETB.")
-            self.__balance = 0.0
-        else:
-            self.__balance = initial_balance
+        if balance < 0:
+            raise ValueError("Initial balance cannot be negative")
+        self.__balance = balance
 
-    # Step 2: @property to read-only access the private balance (no direct edits allowed)
+    # Requirement: Read-only @property for the balance
     @property
-    def balance(self) -> float:
+    def balance(self):
         return self.__balance
 
-    # Step 3 & 4: deposit() that validates and rejects negative amounts
-    def deposit(self, amount: float) -> bool:
+    # Requirement: deposit() that rejects non-positive amounts with ValueError
+    def deposit(self, amount):
         if amount <= 0:
-            print(f"[{self.owner}] Deposit Rejected: Amount must be positive. Attempted: {amount} ETB")
-            return False
-            
+            raise ValueError("Amount must be positive")
         self.__balance += amount
-        print(f"[{self.owner}] Successfully deposited: {amount:,.2f} ETB. New Balance: {self.balance:,.2f} ETB")
-        return True
 
-    # Step 3 & 4: withdraw() that validates and rejects negative/overdraft amounts
-    def withdraw(self, amount: float) -> bool:
+    # Requirement: withdraw() that rejects non-positive amounts and overdrafts
+    def withdraw(self, amount):
         if amount <= 0:
-            print(f"[{self.owner}] Withdrawal Rejected: Amount must be positive.")
-            return False
-            
+            raise ValueError("Amount must be positive")
         if amount > self.__balance:
-            print(f"[{self.owner}] Withdrawal Rejected: Overdraft prevented. Attempted: {amount:,.2f} ETB. Available: {self.balance:,.2f} ETB")
-            return False
-            
+            raise ValueError("Overdraft prevented: Insufficient funds")
         self.__balance -= amount
-        print(f"[{self.owner}] Successfully withdrew: {amount:,.2f} ETB. New Balance: {self.balance:,.2f} ETB")
-        return True
 
-    def display_details(self):
-        """Prints the current state of the account."""
-        print(f"\nAccount Owner: {self.owner}")
+    # Requirement: statement() method to print owner, number, and balance
+    def statement(self):
+        print(f"Account Owner: {self.owner}")
         print(f"Account Number: {self.account_number}")
-        print(f"Current Balance: {self.balance:,.2f} ETB")
-        print("-" * 40)
+        print(f"Balance: {self.balance:.2f} ETB\n")
 
 
-# Step 5: Create two accounts and run transactions
+# Testing block to prove it satisfies all curriculum checks
 if __name__ == "__main__":
-    print("=== Addis Bank System V1 ===")
+    print("=== Addis Bank System V1 (Curriculum Test) ===\n")
     
-    # 1. Create two separate accounts
-    acc1 = Account("Feneti Demissie", "AB-1001", 5000.0)
-    acc2 = Account("Abdi Kebede", "AB-1002", 250.0)
+    # 1. Test separate balances
+    acc1 = Account("Feneti Demissie", "AB-1001", 5000)
+    acc2 = Account("Abdi Kebede", "AB-1002", 250)
     
-    # Display starting details
-    acc1.display_details()
-    acc2.display_details()
+    acc1.statement()
+    acc2.statement()
 
-    # 2. Run transactions
-    print("\n--- Running Transactions ---")
-    acc1.deposit(1500.0)
-    acc1.withdraw(2000.0)
+    print("--- Running Normal Transactions ---")
+    acc1.deposit(1500)
+    acc1.withdraw(2000)
+    acc1.statement()
     
-    # Rejected cases
-    acc2.deposit(-50.0)       # Rejected: Negative deposit
-    acc2.withdraw(500.0)      # Rejected: Overdraft
-    acc2.withdraw(150.0)      # Allowed
-    
-    # Display final state
-    print("\n=== Final Account Status ===")
-    acc1.display_details()
-    acc2.display_details()
+    # 2. Test read-only balance property (cannot set balance directly)
+    print("--- Testing Read-Only Property ---")
+    try:
+        acc1.balance = 1000000 
+    except AttributeError as e:
+        print(f"Success: Direct setting blocked! ({e})")
+
+    # 3. Test negative deposit error handling
+    print("\n--- Testing Negative Deposit Validation ---")
+    try:
+        acc2.deposit(-50)
+    except ValueError as e:
+        print(f"Success: Negative deposit raised error! ({e})")
+        
+    # 4. Test overdraft error handling
+    print("\n--- Testing Overdraft Validation ---")
+    try:
+        acc2.withdraw(500)
+    except ValueError as e:
+        print(f"Success: Overdraft raised error! ({e})")
