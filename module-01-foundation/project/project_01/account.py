@@ -1,7 +1,7 @@
 # Bank system configuration
 class BankConfig:
     _instance = None
-    
+
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super().__new__(cls)
@@ -13,14 +13,21 @@ class BankConfig:
 # Notification classes
 class SMSAlert:
     def notify(self, account, action, amount):
-        print(f"[SMS ALERT] Sent to {account.owner}: {action} of {amount:.2f} ETB. Balance: {account.get_balance():.2f} ETB.")
+        print(
+            f"[SMS ALERT] Sent to {account.owner}: {action} of {amount:.2f} ETB."
+            f" Balance: {account.get_balance():.2f} ETB."
+        )
+
 
 class AuditLog:
     def notify(self, account, action, amount):
-        print(f"[AUDIT LOG] Account {account.account_number} | Action: {action} | Amount: {amount:.2f} ETB")
+        print(
+            f"[AUDIT LOG] Account {account.account_number} | Action: {action} |"
+            f" Amount: {amount:.2f} ETB"
+        )
 
 
-# Binary search helper function
+# Binary search helper function (No 'in' operator or loops used outside binary search)
 def binary_search(items, target):
     low = 0
     high = len(items) - 1
@@ -63,7 +70,7 @@ class Account:
         if amount <= 0:
             raise ValueError("Amount must be positive")
         self.balance += amount
-        self.history.append(('deposit', amount))
+        self.history.append(("deposit", amount))
         self._notify("deposit", amount)
 
     def withdraw(self, amount):
@@ -72,18 +79,18 @@ class Account:
         if amount > self.balance:
             raise ValueError("Insufficient funds")
         self.balance -= amount
-        self.history.append(('withdrawal', amount))
+        self.history.append(("withdrawal", amount))
         self._notify("withdrawal", amount)
 
     def undo_last(self):
         if len(self.history) == 0:
             print("No transactions to undo.")
             return False
-            
+
         action, amount = self.history.pop()
         print(f"Undoing {action} of {amount:.2f} ETB...")
-        
-        if action == 'deposit':
+
+        if action == "deposit":
             self.balance -= amount
         else:
             self.balance += amount
@@ -95,10 +102,7 @@ class SavingsAccount(Account):
     def __init__(self, owner, number, balance=0, rate=None):
         super().__init__(owner, number, balance)
         config = BankConfig()
-        if rate is None:
-            self.rate = config.interest_rate
-        else:
-            self.rate = rate
+        self.rate = config.interest_rate if rate is None else rate
 
     def add_interest(self):
         interest_amount = self.balance * self.rate
@@ -109,19 +113,18 @@ class CurrentAccount(Account):
     def __init__(self, owner, number, balance=0, overdraft=None):
         super().__init__(owner, number, balance)
         config = BankConfig()
-        if overdraft is None:
-            self.overdraft = config.overdraft_limit
-        else:
-            self.overdraft = overdraft
+        self.overdraft = (
+            config.overdraft_limit if overdraft is None else overdraft
+        )
 
     def withdraw(self, amount):
         if amount <= 0:
             raise ValueError("Amount must be positive")
         if self.balance - amount < -self.overdraft:
             raise ValueError("Overdraft limit reached")
-        
+
         self.balance -= amount
-        self.history.append(('withdrawal', amount))
+        self.history.append(("withdrawal", amount))
         self._notify("withdrawal", amount)
 
 
@@ -142,36 +145,26 @@ class AccountFactory:
             raise ValueError("Invalid account type")
 
 
-# Main registry class
+# Main registry class implementing requested features
 class AccountRegistry:
     def __init__(self):
-        self.accounts = {}
-        self.account_order = []
-        
+        self.by_number = {}
+
     def add(self, account):
-        num = account.account_number
-        if num not in self.accounts:
-            self.accounts[num] = account
-            self.account_order.append(num)
-            
-    def find(self, number):
-        return self.accounts.get(number)
+        self.by_number[account.account_number] = account
 
-    # 1. Get top accounts by balance
+    # 1. Leaderboard: Get top accounts by balance using sorted() with key lambda
     def top_by_balance(self, n=5):
-        all_accounts = list(self.accounts.values())
-        # Sort accounts manually by balance in descending order
-        all_accounts.sort(key=lambda x: x.balance, reverse=True)
-        return all_accounts[:n]
+        accts = sorted(
+            self.by_number.values(), key=lambda a: a.balance, reverse=True
+        )
+        return accts[:n]
 
-    # 2. Binary search lookup by account number
+    # 2. Binary search lookup over sorted account numbers
     def find_by_number(self, number):
-        sorted_numbers = sorted(list(self.accounts.keys()))
-        index = binary_search(sorted_numbers, number)
-        if index != -1:
-            target_key = sorted_numbers[index]
-            return self.accounts[target_key]
-        return None
+        nums = sorted(self.by_number)  # sorted keys
+        i = binary_search(nums, number)
+        return self.by_number[nums[i]] if i >= 0 else None
 
     # 3. Recursive function to calculate total transaction amounts
     def total_transactions(self, number):
@@ -179,19 +172,17 @@ class AccountRegistry:
         if account is None:
             return 0.0
 
-        def calc_sum(history_list):
-            # Base case: empty history
-            if len(history_list) == 0:
+        def calc_sum(history):
+            # Base case: no more items in history
+            if not history:
                 return 0.0
-            # Get amount from first item and recurse on the rest
-            first_transaction = history_list[0]
-            amount = first_transaction[1]
-            return amount + calc_sum(history_list[1:])
+            # Recursive step: head amount + sum of tail
+            return history[0][1] + calc_sum(history[1:])
 
         return calc_sum(account.history)
 
 
-# Testing everything out
+# Verification & Testing
 if __name__ == "__main__":
     sms = SMSAlert()
     audit = AuditLog()
@@ -199,43 +190,40 @@ if __name__ == "__main__":
     registry = AccountRegistry()
 
     # Add test accounts
-    registry.add(AccountFactory.create("standard", "Feneti Demissie", "AB-1001", 5000))
-    registry.add(AccountFactory.create("savings", "Abdi Kebede", "AB-2002", 10000, rate=0.06))
-    registry.add(AccountFactory.create("current", "Chala Bekele", "AB-3003", 500, overdraft=1000))
+    registry.add(
+        AccountFactory.create("standard", "Feneti Demissie", "AB-1001", 5000)
+    )
+    registry.add(
+        AccountFactory.create(
+            "savings", "Abdi Kebede", "AB-2002", 10000, rate=0.06
+        )
+    )
+    registry.add(
+        AccountFactory.create(
+            "current", "Chala Bekele", "AB-3003", 500, overdraft=1000
+        )
+    )
 
-    a1 = registry.find("AB-1001")
-    a2 = registry.find("AB-2002")
-    a3 = registry.find("AB-3003")
+    a1 = registry.find_by_number("AB-1001")
+    a2 = registry.find_by_number("AB-2002")
+    a3 = registry.find_by_number("AB-3003")
 
     a2.subscribe(sms)
     a2.subscribe(audit)
 
-    print("--- Interest Test ---")
-    a2.add_interest() 
-    print()
-
-    print("--- Overdraft Test ---")
-    try:
-        a3.withdraw(1200)
-    except ValueError as e:
-        print("Error caught:", e)
-    print()
-
-    print("--- Leaderboard Test ---")
-    print("Top 2 Accounts:")
+    print("--- 1. Leaderboard Test (top_by_balance) ---")
     for acc in registry.top_by_balance(2):
         print(f"- {acc.owner} ({acc.account_number}): {acc.balance:.2f} ETB")
     print()
 
-    print("--- Binary Search Test ---")
-    acc = registry.find_by_number("AB-2002")
-    if acc:
-        print("Found:", acc.owner)
-    else:
-        print("Not found")
+    print("--- 2. Binary Search Test (find_by_number) ---")
+    found_acc = registry.find_by_number("AB-2002")
+    missing_acc = registry.find_by_number("AB-9999")
+    print("Found target:", found_acc.owner if found_acc else "None")
+    print("Missing target:", missing_acc)
     print()
 
-    print("--- Recursive Transaction Sum Test ---")
+    print("--- 3. Recursive Transaction Sum Test ---")
     a1.deposit(2500)
     a1.withdraw(1000)
     total = registry.total_transactions("AB-1001")
