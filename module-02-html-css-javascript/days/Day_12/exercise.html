@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 12 Exercises - HTML & Accessibility</title>
+    <meta name="description" content="Day 12 HTML exercises covering forms, tables, media elements, and accessibility fixes.">
+</head>
+<body>
+
+    <main>
+        <h1>Day 12 HTML Exercises</h1>
+
+        <!-- Exercise 1: Ethio Telecom Form -->
+        <section>
+            <h2>1. Ethio Telecom Service Registration</h2>
+
+            <!-- 
+                Using POST here because we're submitting personal details (name, phone, email). 
+                POST keeps sensitive info out of the browser URL bar unlike GET.
+            -->
+            <form action="/register" method="POST">
+                <p>
+                    <label for="fullname">Full Name:</label><br>
+                    <input type="text" id="fullname" name="fullname" placeholder="Abebe Bikila" required>
+                </p>
+
+                <p>
+                    <label for="email">Email Address:</label><br>
+                    <input type="email" id="email" name="email" placeholder="abebe@example.com" required>
+                </p>
+
+                <p>
+                    <label for="phone">Phone Number:</label><br>
+                    <input 
+                        type="tel" 
+                        id="phone" 
+                        name="phone" 
+                        pattern="\+251[0-9]{9}" 
+                        placeholder="+251911234567" 
+                        title="Enter +251 followed by 9 digits" 
+                        required>
+                </p>
+
+                <p>
+                    <label for="branch">Select Branch:</label><br>
+                    <select id="branch" name="branch" required>
+                        <option value="">-- Choose a branch --</option>
+                        <option value="bole">Bole</option>
+                        <option value="kazanchis">Kazanchis</option>
+                        <option value="piassa">Piassa</option>
+                    </select>
+                </p>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <hr>
+
+        <!-- Exercise 2: Ethiopian Airlines Flight Table -->
+        <section>
+            <h2>2. Flight Schedule</h2>
+
+            <table border="1" cellpadding="8" style="border-collapse: collapse;">
+                <caption>Ethiopian Airlines Daily Flight Schedule</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Flight</th>
+                        <th scope="col">From</th>
+                        <th scope="col">To</th>
+                        <th scope="col">Departs</th>
+                        <th scope="col">Price ETB</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ET 102</td>
+                        <td>Addis Ababa</td>
+                        <td>Bahar Dar</td>
+                        <td>07:30 AM</td>
+                        <td>4,200</td>
+                    </tr>
+                    <tr>
+                        <td>ET 204</td>
+                        <td>Addis Ababa</td>
+                        <td>Gondar</td>
+                        <td>09:15 AM</td>
+                        <td>4,800</td>
+                    </tr>
+                    <tr>
+                        <td>ET 306</td>
+                        <td>Addis Ababa</td>
+                        <td>Mekelle</td>
+                        <td>11:00 AM</td>
+                        <td>5,100</td>
+                    </tr>
+                    <tr>
+                        <td>ET 412</td>
+                        <td>Addis Ababa</td>
+                        <td>Dire Dawa</td>
+                        <td>01:45 PM</td>
+                        <td>3,900</td>
+                    </tr>
+                    <tr>
+                        <td>ET 500</td>
+                        <td>Addis Ababa</td>
+                        <td>Hawassa</td>
+                        <td>04:20 PM</td>
+                        <td>3,500</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <hr>
+
+        <!-- Exercise 3: Media & Map -->
+<section>
+    <h2>3. Cultural Landmark & Location</h2>
+
+    <figure>
+        <!-- Updated src to point to your local assets folder -->
+        <img src="assets/landmark.jpg" alt="Landscape view of traditional Ethiopian countryside and mountains" width="400">
+        <figcaption>Historical landscape in Ethiopia.</figcaption>
+    </figure>
+
+    <h3>Branch Map</h3>
+    <iframe 
+        src="https://maps.google.com/maps?q=Addis%20Ababa&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+        width="100%" 
+        height="300" 
+        style="border: 0;" 
+        loading="lazy" 
+        title="Google Map showing Addis Ababa branch location">
+    </iframe>
+</section>
+        <hr>
+
+        <!-- Exercise 4: Accessibility Fixes -->
+        <section>
+            <h2>4. Refactored Code (Accessibility Fixes)</h2>
+
+            <!--
+                Fixes made:
+                1. Replaced the <div> click handler with a real <button> so it's keyboard focusable and read as a button by screen readers.
+                2. Added a <label for="search"> linked to the input ID so screen readers announce the field name and clicking text focuses the input.
+                3. Added meaningful alt text to the image so visually impaired users know what it displays.
+            -->
+
+            <div>
+                <button type="button">Add to Cart</button>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label for="search">Search Products:</label>
+                <input type="search" id="search" name="search" placeholder="Search coffee or spices...">
+            </div>
+
+            <div style="margin-top: 15px;">
+                <img src="assets/buna.jpg" alt="Traditional Ethiopian Injera platter served with various stews">
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
