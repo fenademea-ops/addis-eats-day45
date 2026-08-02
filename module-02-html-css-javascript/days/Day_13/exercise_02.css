@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.card {
+    width: 300px;
+    padding: 24px;
+    border: 2px solid #333333;
+    margin-bottom: 20px;
+}
+
+/* 1. Unfixed card showing content-box behavior */
+.card-content-box {
+    box-sizing: content-box;
+    border-color: #d32f2f;
+    background-color: #ffebee;
+}
+
+/* 2. Fixed card showing border-box behavior */
+.card-border-box {
+    box-sizing: border-box;
+    border-color: #2e7d32;
+    background-color: #e8f5e9;
+}

@@ -1,0 +1,20 @@
+/* 1. Root variables block */
+:root {
+    --primary-color: #8b0000;                      /* Color 1 */
+    --text-color: #ffffff;                         /* Color 2 */
+    --btn-padding: 12px 24px;                       /* Spacing */
+    --font-stack: 'Segoe UI', Tahoma, sans-serif;  /* Font stack */
+}
+
+/* 2. Styled button using all four var() properties */
+.custom-btn {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: var(--btn-padding);
+    font-family: var(--font-stack);
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}

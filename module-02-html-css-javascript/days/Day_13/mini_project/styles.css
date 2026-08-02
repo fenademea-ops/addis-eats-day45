@@ -1,0 +1,169 @@
+
+:root {
+  /* Color Palette */
+  --bg-main: #f4f6f8;
+  --card-bg: #ffffff;
+  --primary: #1d528d;
+  --primary-hover-hsl: 212, 66%, 25%;
+  --gold-accent: #e5a93b;
+  --text-dark: #1e293b;
+  --text-muted: #64748b;
+  --border-light: #e2e8f0;
+
+  /* Spacing Scale */
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+
+  /* Card Radius */
+  --radius-card: 12px;
+}
+
+/* ==========================================================================
+   Global Resets & Base Styles
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-md);
+}
+
+/* ==========================================================================
+   Profile Card Component
+   ========================================================================== */
+.profile-card {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  background-color: var(--card-bg);
+  padding: var(--space-lg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-card);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+/* Decorative Gold Top Bar (Pseudo-element) */
+.profile-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background-color: var(--gold-accent);
+}
+
+/* Image Container & Styling */
+.profile-card__image-container {
+  margin-top: var(--space-xs);
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+.profile-card__img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.profile-card__caption {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: var(--space-xs);
+  font-weight: 400;
+}
+
+/* Typography Hierarchy */
+.profile-card__header {
+  margin-bottom: var(--space-md);
+}
+
+.profile-card__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.profile-card__tagline {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.profile-card__content {
+  margin-bottom: var(--space-lg);
+}
+
+.profile-card__text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-dark);
+  margin-bottom: var(--space-md);
+}
+
+/* Badge Styling */
+.profile-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #f0f4f8;
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.profile-card__badge::before {
+  content: "•";
+  color: var(--gold-accent);
+  font-size: 1.2rem;
+}
+
+/* Footer & Button */
+.profile-card__footer {
+  margin-top: var(--space-md);
+}
+
+.contact-btn {
+  display: block;
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--primary);
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+/* Button Hover State using HSL Lightness */
+.contact-btn:hover {
+  background-color: hsl(var(--primary-hover-hsl));
+}
+
+.contact-btn:focus-visible {
+  outline: 2px solid var(--gold-accent);
+  outline-offset: 2px;
+}

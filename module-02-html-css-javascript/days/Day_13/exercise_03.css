@@ -1,0 +1,20 @@
+/* Element Selector Score: (0, 0, 1) */
+p {
+    color: blue;
+}
+
+/* Class Selector Score: (0, 1, 0) */
+.text-color {
+    color: green;
+}
+
+/* ID Selector Score: (1, 0, 0) — WINNER */
+#main-text {
+    color: red;
+}
+
+.explanation {
+    margin-top: 24px;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}

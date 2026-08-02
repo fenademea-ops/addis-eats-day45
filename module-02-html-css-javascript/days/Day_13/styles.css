@@ -1,0 +1,118 @@
+/* ==========================================================================
+   1. Root Variables (Tokens)
+   ========================================================================== */
+:root {
+    --primary-color: #8b0000;    /* Deep Ethiopian Red */
+    --accent-gold: #d4af37;      /* Warm Gold Accent */
+    --text-color: #2b2b2b;       /* Charcoal Text */
+    --bg-light: #faf8f5;         /* Soft Off-White Background */
+    --stripe-bg: #f2ede4;        /* Light Beige for Zebra-striping */
+    --card-border: #e0d7c6;      /* Subtle Border Color */
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   2. Global Reset & Body Typography
+   ========================================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* ==========================================================================
+   3. Menu Card Component
+   ========================================================================== */
+.menu-card {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    padding: 24px;
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    
+    /* Gold top accent border using variable */
+    border-top: 5px solid var(--accent-gold);
+    
+    box-shadow: 0 4px 12px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Pseudo-class: :hover state */
+.menu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+/* Header & Typography inside Card */
+.menu-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+}
+
+.menu-card__title {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* Pseudo-element: ::before prefixing "ETB " to the price */
+.menu-card__price {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.menu-card__price::before {
+    content: "ETB ";
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent-gold);
+}
+
+.menu-card__description {
+    margin-bottom: 16px;
+    font-size: 0.95rem;
+}
+
+.menu-card h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+    border-bottom: 1px dashed var(--card-border);
+    padding-bottom: 4px;
+}
+
+/* Ingredient List & Pseudo-class: :nth-child(even) zebra-striping */
+.menu-card__ingredients {
+    list-style: none;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.menu-card__ingredients li {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+}
+
+/* Zebra-striping rule */
+.menu-card__ingredients li:nth-child(even) {
+    background-color: var(--stripe-bg);
+}

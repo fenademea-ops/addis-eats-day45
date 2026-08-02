@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise_02 - Box Model Comparison</title>
+    <link rel="stylesheet" href="exercise_02.css">
+</head>
+<body>
+
+    <main>
+        <h2>Exercise_02: content-box vs border-box</h2>
+
+        <h3>1. Content-Box (Rendered Width: 352px)</h3>
+        <div class="card card-content-box">
+            This card uses <code>content-box</code>. Total width becomes 300px + 48px padding + 4px border = 352px.
+        </div>
+
+        <h3>2. Border-Box (Rendered Width: 300px)</h3>
+        <div class="card card-border-box">
+            This card uses <code>border-box</code>. Total width is fixed at exactly 300px.
+        </div>
+    </main>
+
+</body>
+</html>

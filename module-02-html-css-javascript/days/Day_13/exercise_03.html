@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise_03 - Specificity Test</title>
+    <link rel="stylesheet" href="exercise_03.css">
+</head>
+<body>
+
+    <main>
+        <h2>Exercise_03: CSS Specificity</h2>
+        <p id="main-text" class="text-color">
+            This paragraph is targeted by an element selector (p), a class selector (.text-color), and an ID selector (#main-text).
+        </p>
+
+        <section class="explanation">
+            <h3>Winning Prediction &amp; Explanation</h3>
+            <p><strong>Winner:</strong> Red (set by <code>#main-text</code>)</p>
+            <ul>
+                <li><code>p</code> (Element selector) = Specificity Score: <strong>(0, 0, 1)</strong></li>
+                <li><code>.text-color</code> (Class selector) = Specificity Score: <strong>(0, 1, 0)</strong></li>
+                <li><code>#main-text</code> (ID selector) = Specificity Score: <strong>(1, 0, 0)</strong></li>
+            </ul>
+            <p>The ID selector wins because <code>(1, 0, 0)</code> outranks both class and element selectors regardless of stylesheet order.</p>
+        </section>
+    </main>
+
+</body>
+</html>

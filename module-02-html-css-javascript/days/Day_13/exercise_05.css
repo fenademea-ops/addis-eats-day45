@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.palette-container {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.color-card {
+    width: 200px;
+    padding: 16px;
+    border-radius: 8px;
+    color: #ffffff;
+    transition: background-color 0.3s ease;
+}
+
+/* 1. Red Base and Lighter Hover */
+.color-red {
+    background-color: hsl(349, 86%, 44%);
+}
+.color-red:hover {
+    background-color: hsl(349, 86%, 60%); /* Increased Lightness */
+}
+
+/* 2. Green Base and Lighter Hover */
+.color-green {
+    background-color: hsl(150, 100%, 30%);
+}
+.color-green:hover {
+    background-color: hsl(150, 100%, 45%); /* Increased Lightness */
+}
+
+/* 3. Gold Base and Lighter Hover */
+.color-gold {
+    background-color: hsl(49, 100%, 50%);
+    color: #000000;
+}
+.color-gold:hover {
+    background-color: hsl(49, 100%, 65%); /* Increased Lightness */
+}
