@@ -1,0 +1,118 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: #faf6f0;
+  color: #3b2314;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.card-container {
+  padding: 2rem;
+}
+
+/* ------------------------------------------------------------------
+   EXERCISE 5 KEY REQUIREMENT:
+   1. Card is `position: relative` (the anchor context)
+   2. Badge is `position: absolute` (pinned to the corner)
+------------------------------------------------------------------ */
+
+.product-card {
+  /* STEP 1: Relative positioning context for the badge */
+  position: relative;
+  
+  width: 300px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e0dace;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: visible; /* Allows badge to pop slightly past the corner */
+}
+
+/* STEP 2: Absolute Circular "ETB Sale" Badge */
+.sale-badge {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  z-index: 10;
+  
+  /* Circular styling */
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  
+  /* Colors & Typography */
+  background-color: #d97706; /* Gold/Amber */
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.1;
+  
+  /* Flexbox inside badge to center text vertically & horizontally */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Card Image Styles */
+.card-img {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Card Text Content */
+.card-content {
+  padding: 1.25rem;
+}
+
+.card-title {
+  font-size: 1.3rem;
+  color: #8c4217;
+  margin-bottom: 0.5rem;
+}
+
+.card-description {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.card-price {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.old-price {
+  font-size: 0.95rem;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.new-price {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #8c4217;
+}
