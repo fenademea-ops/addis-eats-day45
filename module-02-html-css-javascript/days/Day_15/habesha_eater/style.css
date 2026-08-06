@@ -1,0 +1,571 @@
+/* ==========================================================================
+   1. Design Tokens & Base Styles
+   ========================================================================== */
+:root {
+  --color-bg: #fcf9f4;
+  --color-surface: #ffffff;
+  --color-text: #2c2523;
+  --color-muted: #615652;
+  --color-border: #e6dfd9;
+  --color-badge: #d37332;
+  --color-badge-accent: #a45a2a;
+  --color-footer-bg: #1c130e;
+
+  /* Header Color Variations Per Page */
+  --header-home: #8b3e15;        /* Deep Terracotta Brown */
+  --header-menu: #2e5a3c;        /* Ethiopian Coffee Garden Green */
+  --header-about: #70281b;       /* Berbere Spice Red */
+  --header-contact: #3b4252;     /* Warm Slate Gray */
+  --header-reservation: #b3591b; /* Warm Ochre Amber */
+
+  --radius-card: 16px;
+  --radius-btn: 24px;
+  --radius-input: 8px;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 14px 28px rgba(139, 62, 21, 0.18);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   2. HTML Page Background Images (with Soft Overlays)
+   ========================================================================== */
+body.page-home {
+  background: linear-gradient(rgba(252, 249, 244, 0.92), rgba(252, 249, 244, 0.92)),
+              url('asset/injera.jpg') center/cover no-repeat fixed;
+}
+
+body.page-menu {
+  background: linear-gradient(rgba(252, 249, 244, 0.92), rgba(252, 249, 244, 0.92)),
+              url('asset/veggie-combo.jpg') center/cover no-repeat fixed;
+}
+
+body.page-about {
+  background: linear-gradient(rgba(252, 249, 244, 0.92), rgba(252, 249, 244, 0.92)),
+              url('asset/doro_wat.jpg') center/cover no-repeat fixed;
+}
+
+body.page-contact {
+  background: linear-gradient(rgba(252, 249, 244, 0.92), rgba(252, 249, 244, 0.92)),
+              url('asset/beef-tibs.jpg') center/cover no-repeat fixed;
+}
+
+body.page-reservation {
+  background: linear-gradient(rgba(252, 249, 244, 0.92), rgba(252, 249, 244, 0.92)),
+              url('asset/kitfo.jpg') center/cover no-repeat fixed;
+}
+
+/* ==========================================================================
+   3. Custom Navbar Headers
+   ========================================================================== */
+.navbar {
+  padding: 0.9rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transition: background-color 0.3s ease;
+}
+
+.navbar-home        { background-color: var(--header-home); }
+.navbar-menu        { background-color: var(--header-menu); }
+.navbar-about       { background-color: var(--header-about); }
+.navbar-contact     { background-color: var(--header-contact); }
+.navbar-reservation { background-color: var(--header-reservation); }
+
+.brand {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  opacity: 0.85;
+  text-decoration: underline;
+}
+
+.btn-reserve {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 0.55rem 1.35rem;
+  border-radius: var(--radius-btn);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  transition: all 0.2s ease;
+}
+
+.btn-reserve:hover {
+  background-color: #ffffff;
+  color: var(--color-text);
+}
+
+/* ==========================================================================
+   4. Main Container
+   ========================================================================== */
+main {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+/* ==========================================================================
+   5. Hero Banner Sections
+   ========================================================================== */
+.hero {
+  border-radius: var(--radius-card);
+  margin-bottom: 3rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  color: #ffffff;
+  padding: 4.5rem 2rem;
+  text-align: center;
+}
+
+.hero-home {
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), 
+              url('asset/injera.jpg') center/cover no-repeat;
+}
+
+.hero-menu {
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), 
+              url('asset/veggie-combo.jpg') center/cover no-repeat;
+}
+
+.hero-about {
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), 
+              url('asset/doro_wat.jpg') center/cover no-repeat;
+}
+
+.hero-contact {
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), 
+              url('asset/beef-tibs.jpg') center/cover no-repeat;
+}
+
+.hero-reservation {
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), 
+              url('asset/kitfo.jpg') center/cover no-repeat;
+}
+
+.hero-overlay {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero .hero-title {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  color: #ffffff;
+  font-weight: 800;
+  margin-bottom: 1.25rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.hero .hero-description {
+  font-size: 1.15rem;
+  color: #f3f0ec;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-cta {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.btn-hero-primary {
+  background-color: var(--color-badge);
+  color: #ffffff;
+  padding: 0.85rem 2rem;
+  border-radius: var(--radius-btn);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 4px 14px rgba(211, 115, 50, 0.4);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-hero-primary:hover {
+  background-color: #be6124;
+  transform: translateY(-2px);
+}
+
+.btn-hero-secondary {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  padding: 0.85rem 2rem;
+  border-radius: var(--radius-btn);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+}
+
+.btn-hero-secondary:hover {
+  background-color: #ffffff;
+  color: var(--color-text);
+  transform: translateY(-2px);
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.25rem;
+  color: var(--header-home);
+  font-weight: 800;
+  margin-bottom: 2rem;
+}
+
+/* ==========================================================================
+   6. Cards & Grid Layouts
+   ========================================================================== */
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+}
+
+@media (min-width: 768px) {
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .menu-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  position: relative;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background-color: var(--color-badge);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-btn);
+  letter-spacing: 0.05em;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.badge-accent {
+  background-color: var(--color-badge-accent);
+}
+
+.card-img {
+  width: 100%;
+  height: 230px;
+  overflow: hidden;
+}
+
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card:hover .card-img img {
+  transform: scale(1.05);
+}
+
+.card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-title {
+  font-size: 1.35rem;
+  color: var(--header-home);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.card-description {
+  font-size: 0.92rem;
+  color: var(--color-muted);
+  flex: 1;
+  margin-bottom: 1.5rem;
+}
+
+.card-price {
+  font-weight: 800;
+  color: var(--header-home);
+  font-size: 1.2rem;
+}
+
+/* ==========================================================================
+   7. Content Boxes, Forms & Media
+   ========================================================================== */
+.info-box {
+  background-color: var(--color-surface);
+  padding: 3rem 2.5rem;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  margin-bottom: 3rem;
+}
+
+.about-text {
+  font-size: 1.05rem;
+  color: var(--color-text);
+  max-width: 850px;
+  margin: 0 auto 1.5rem auto;
+  text-align: center;
+}
+
+.media-figure {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.media-figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-card);
+}
+
+.media-figure figcaption {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  margin-top: 0.5rem;
+}
+
+.sub-title {
+  font-size: 1.4rem;
+  color: var(--header-home);
+  margin: 1.5rem 0 1rem;
+}
+
+/* Embedded Google Map Frame */
+.map-container {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.map-container iframe {
+  display: block;
+  border: 0;
+}
+
+/* Form Styles */
+.form-container {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+@media (min-width: 600px) {
+  .form-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-input);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-badge);
+  box-shadow: 0 0 0 3px rgba(211, 115, 50, 0.2);
+  background-color: var(--color-surface);
+}
+
+.btn-submit {
+  background-color: var(--header-home);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.9rem 1.75rem;
+  border: none;
+  border-radius: var(--radius-input);
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.btn-submit:hover {
+  background-color: #6e2f0d;
+}
+
+/* ==========================================================================
+   8. Opening Hours Table Styling
+   ========================================================================== */
+.hours-table-container {
+  max-width: 550px;
+  margin: 1.5rem auto 0 auto;
+  overflow-x: auto;
+}
+
+.hours-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.hours-table caption {
+  font-size: 0.95rem;
+  color: var(--color-muted);
+  margin-bottom: 1.25rem;
+  font-weight: 500;
+}
+
+.hours-table th {
+  color: var(--header-home);
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.hours-table td {
+  padding: 0.85rem 1rem;
+  font-size: 0.98rem;
+  color: var(--color-text);
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.hours-table tr:last-child td {
+  border-bottom: none;
+}
+
+.hours-table th:last-child,
+.hours-table td:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   9. Footer
+   ========================================================================== */
+footer {
+  background-color: var(--color-footer-bg);
+  color: #d1c2b8;
+  text-align: center;
+  padding: 2.75rem 1rem;
+  margin-top: auto;
+}
+
+.copyright {
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  gap: 1.75rem;
+}
+
+.footer-links a {
+  color: #d1c2b8;
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+}

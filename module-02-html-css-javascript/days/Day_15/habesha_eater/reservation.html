@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habesha Eatery — Book a Table</title>
+  <meta name="description" content="Reserve a table at Habesha Eatery in Bole, Addis Ababa." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page-reservation">
+
+  <header class="navbar navbar-reservation">
+    <div class="brand">Habesha Eatery</div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="reservation.html" class="btn-reserve">Reserve</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero-reservation">
+      <div class="hero-overlay">
+        <h1 class="hero-title">Experience Authentic Dining</h1>
+        <p class="hero-description">
+          Gather around traditional flavors, freshly baked Injera, and warm Ethiopian hospitality in the heart of Bole, Addis Ababa.
+        </p>
+      </div>
+    </section>
+
+    <section class="info-box">
+      <h2 class="section-title">Table Reservation</h2>
+      <form action="/reserve" method="post" class="form-container">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="e.g. Abebe Bikila" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="name@example.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+251 91 123 4567" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="guests">Number of Guests (1–20)</label>
+            <input type="number" id="guests" name="guests" min="1" max="20" value="2" required />
+          </div>
+
+          <div class="form-group">
+            <label for="date">Reservation Date</label>
+            <input type="date" id="date" name="date" required />
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Reserve Table</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p class="copyright">&copy; 2026 Habesha Eatery. Located in Bole, Addis Ababa, Ethiopia.</p>
+    <ul class="footer-links">
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms of Service</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </footer>
+
+</body>
+</html>
