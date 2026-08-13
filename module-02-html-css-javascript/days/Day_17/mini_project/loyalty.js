@@ -1,6 +1,5 @@
 
 
-// --- 1. Core Module Function ---
 function createLoyalty(earnRule = etb => Math.floor(etb / 10)) {
   let points = 0; // Private state protected inside the closure
 

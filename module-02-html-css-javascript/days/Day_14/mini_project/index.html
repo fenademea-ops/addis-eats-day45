@@ -1,202 +1,1589 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ethio Telecom connectivity services">
-  <title>Ethio Telecom</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ethio telecom - Digital & Connectivity Solutions</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* =====================================================
+           SIDEBAR MENU BUTTON
+        ===================================================== */
+
+        .sidebar-toggle {
+            position: fixed;
+            top: 18px;
+            left: 18px;
+
+            width: 20px;
+            height: 30px;
+
+            border: none;
+            border-radius: 8px;
+
+            background-color: #8cc63f;
+            color: white;
+
+            font-size: 20px;
+
+            cursor: pointer;
+
+            z-index: 2000;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+
+            transition: 0.3s ease;
+        }
+
+        .sidebar-toggle:hover {
+            background-color: #72a831;
+            transform: scale(1.05);
+        }
+
+        /* Make sidebar transition smoothly */
+        .app-sidebar {
+            transition: transform 0.3s ease, width 0.3s ease;
+        }
+
+        .page-container {
+            transition: margin-left 0.3s ease, width 0.3s ease;
+        }
+
+        /* Sidebar hidden */
+        .app-sidebar.sidebar-hidden {
+            transform: translateX(-100%);
+        }
+
+        /* Main content when sidebar is hidden */
+        .page-container.sidebar-closed {
+            margin-left: 0 !important;
+            width: 100% !important;
+        }
+
+        /* Overlay for mobile */
+        .sidebar-overlay {
+            display: none;
+
+            position: fixed;
+            inset: 0;
+
+            background: rgba(0,0,0,0.4);
+
+            z-index: 999;
+        }
+
+        .sidebar-overlay.show {
+            display: block;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+
+            .sidebar-toggle {
+                top: 15px;
+                left: 15px;
+            }
+
+            .app-sidebar {
+                width: 260px !important;
+                transform: translateX(-100%);
+            }
+
+            .app-sidebar.sidebar-visible {
+                transform: translateX(0);
+            }
+
+            .page-container {
+                margin-left: 0 !important;
+                width: 100% !important;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-  <header class="header">
-    <div class="topbar">
-      <span>● Network status: all systems operational</span>
-      <nav>
-        <a href="#help">Help center</a>
-        <a href="#stores">Service centers</a>
-        <a href="#language">English⌄</a>
-      </nav>
-    </div>
+    <!-- =====================================================
+         SIDEBAR TOGGLE BUTTON
+    ====================================================== -->
 
-    <div class="navbar">
-      <a href="#" class="logo">
-        <span class="logo-bars"><i></i><i></i><i></i></span>
-        <strong>ethio</strong> telecom
-      </a>
+    <button
+        class="sidebar-toggle"
+        id="sidebarToggle"
+        aria-label="Open sidebar"
+        aria-expanded="false">
 
-      <!-- Pure CSS Mobile Menu Toggle Checkbox -->
-      <input type="checkbox" id="menu-toggle" class="menu-checkbox" aria-label="Toggle Navigation">
-      <label for="menu-toggle" class="menu-button" aria-label="Open menu">☰</label>
+        <i class="fa-solid fa-bars"></i>
 
-      <nav class="main-nav">
-        <a href="#personal">Personal⌄</a>
-        <a href="#business">Business⌄</a>
-        <a href="#telebirr">Telebirr</a>
-        <a href="#about">About us</a>
-      </nav>
+    </button>
 
-      <a class="account-button" href="#account">My account</a>
-    </div>
-  </header>
 
-  <main>
+    <!-- =====================================================
+         SIDEBAR OVERLAY
+    ====================================================== -->
 
-    <section class="hero">
-      <div class="hero-content">
-        <p class="eyebrow">A brighter way forward</p>
-        <h1>Connection that <em>moves</em> with you.</h1>
-        <p class="hero-text">
-          Stay close to what matters with Ethiopia's trusted digital network.
-          More speed, more choice, more ways to live connected.
-        </p>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-        <div class="hero-buttons">
-          <a href="#services" class="button light-button">Explore services →</a>
-          <a href="#story" class="story-link">▶ Watch our story</a>
-        </div>
-      </div>
 
-      <div class="hero-image">
-        <img
-          src="assets/ethio-telecom-campaign.png"
-          alt="Person using a smartphone"
-        >
+    <!-- =====================================================
+         LEFT SIDEBAR
+    ====================================================== -->
 
-        <a
-          class="download-button"
-          href="assets/ethio-telecom-campaign.png"
-          download
-        >
-          Download image ↓
-        </a>
+    <aside class="app-sidebar" id="appSidebar">
 
-        <div class="five-g-badge">
-          <strong>5G</strong>
-          <span>Ready for<br>what's next</span>
-        </div>
-      </div>
-    </section>
+        <div class="sidebar-brand">
 
-    <section class="stats">
-      <div class="stat-item">
-        <strong>75<span>+</span></strong>
-        <p>million customers</p>
-      </div>
+            <i class="fa-solid fa-satellite-dish brand-icon"></i>
 
-      <div class="stat-item">
-        <strong>99<span>%</span></strong>
-        <p>network coverage</p>
-      </div>
+            <span class="brand-text">
+                Ethio telecom
+            </span>
 
-      <div class="stat-item">
-        <strong>24<span>/7</span></strong>
-        <p>always-on support</p>
-      </div>
-
-      <div class="stats-message">
-        <span>✦</span>
-        <p>Building Ethiopia's<br><strong>digital future</strong></p>
-      </div>
-    </section>
-
-    <section class="services" id="services">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">Everything in one place</p>
-          <h2>Designed around <em>your world.</em></h2>
         </div>
 
-        <a href="#all-services" class="see-all-link">See all services →</a>
-      </div>
 
-      <div class="service-grid">
-        <a href="#mobile" class="service-card blue">
-          <span class="service-icon">▣</span>
-          <span class="card-arrow">→</span>
-          <h3>Mobile</h3>
-          <p>Flexible voice, data and SMS plans for every kind of day.</p>
-        </a>
+        <nav class="sidebar-nav">
 
-        <a href="#telebirr" class="service-card orange">
-          <span class="service-icon">✦</span>
-          <span class="card-arrow">→</span>
-          <h3>Telebirr</h3>
-          <p>A safer, simpler way to pay bills and move money.</p>
-        </a>
+            <ul>
 
-        <a href="#internet" class="service-card purple">
-          <span class="service-icon">◒</span>
-          <span class="card-arrow">→</span>
-          <h3>Home internet</h3>
-          <p>Reliable connectivity for work, learning and entertainment.</p>
-        </a>
+                <li class="active">
+                    <a href="#">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
 
-        <a href="#business" class="service-card green">
-          <span class="service-icon">◎</span>
-          <span class="card-arrow">→</span>
-          <h3>Business</h3>
-          <p>Digital solutions that help your organization move forward.</p>
-        </a>
-      </div>
-    </section>
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-wallet"></i>
+                        <span>telebirr Financial</span>
+                    </a>
+                </li>
 
-    <section class="story" id="story">
-      <div class="story-art">
-        <span class="story-circle"></span>
-        <span class="story-star">✦</span>
-      </div>
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-play"></i>
+                        <span>teleStream Media</span>
+                    </a>
+                </li>
 
-      <div class="story-content">
-        <p class="eyebrow">The network behind you</p>
-        <h2>Technology with a <em>human pulse.</em></h2>
-        <p>
-          From a first hello to a bold new idea, we make it easier for people,
-          communities and businesses to connect, create and grow.
-        </p>
-        <a href="#about" class="button dark-button">Discover our story →</a>
-      </div>
-    </section>
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-cloud"></i>
+                        <span>Znexus Cloud Services</span>
+                    </a>
+                </li>
 
-  </main>
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-store"></i>
+                        <span>Zemen GEBEYA</span>
+                    </a>
+                </li>
 
-  <footer class="footer" id="about">
-    <div>
-      <a href="#" class="logo footer-logo">
-        <span class="logo-bars"><i></i><i></i><i></i></span>
-        <strong>ethio</strong> telecom
-      </a>
-      <p>Connecting people. Empowering progress.</p>
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-wifi"></i>
+                        <span>Broadband & Mobile</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>EV Charging Networks</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-briefcase"></i>
+                        <span>Enterprise & Government</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-circle-question"></i>
+                        <span>Support & Help Center</span>
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="lang-switch">
+                <a href="#" class="active">EN</a>
+                |
+                <a href="#">AM</a>
+            </div>
+
+            <p>
+                &copy; 2026 Ethio telecom
+            </p>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN CONTENT CONTAINER
+    ====================================================== -->
+
+    <div class="page-container" id="pageContainer">
+
+
+        <!-- =================================================
+             TOP UTILITY BAR
+        ================================================== -->
+
+        <div class="utility-topbar">
+
+            <div class="utility-links">
+
+                <a href="#">Investors Relation</a>
+
+                <a href="#">telebirr</a>
+
+                <a href="#">
+                    Cloud Solutions
+                    <i class="fa-solid fa-chevron-down"></i>
+                </a>
+
+                <a href="#">Our Logos</a>
+
+            </div>
+
+
+            <div class="utility-right">
+
+                <select class="lang-selector">
+
+                    <option>ENG</option>
+
+                    <option>AMH</option>
+
+                </select>
+
+
+                <button
+                    class="theme-toggle"
+                    aria-label="Toggle theme">
+
+                    <i class="fa-solid fa-sun"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             MAIN TOP NAVIGATION
+        ================================================== -->
+
+        <header class="top-nav">
+
+            <div class="nav-left">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        placeholder="Search products, internet plans, telebirr...">
+
+                </div>
+
+
+                <nav class="category-menu">
+
+                    <ul>
+
+                        <li class="has-dropdown">
+
+                            <a href="#" class="dropdown-trigger">
+
+                                Personal
+
+                                <i class="fa-solid fa-chevron-down"></i>
+
+                            </a>
+
+
+                            <div class="mega-dropdown">
+
+                                <div class="mega-dropdown-content">
+
+                                    <div class="dropdown-col">
+
+                                        <a href="#">
+                                            Getting Started
+                                        </a>
+
+                                        <a href="#">
+                                            5G Mobile Packages
+                                        </a>
+
+                                        <a href="#">
+                                            Recurring Mobile Package
+                                        </a>
+
+                                    </div>
+
+
+                                    <div class="dropdown-col">
+
+                                        <a href="#">
+                                            Long Validity Package
+                                        </a>
+
+                                        <a href="#">
+                                            Mobile Package
+                                        </a>
+
+                                        <a href="#">
+                                            Fixed BB Internet
+                                        </a>
+
+                                    </div>
+
+
+                                    <div class="dropdown-col">
+
+                                        <a href="#">
+                                            Airtime Top Up
+                                        </a>
+
+                                        <a href="#">
+                                            Airtime and Package Credit
+                                        </a>
+
+                                        <a href="#">
+                                            VAS & CRBT
+                                        </a>
+
+                                    </div>
+
+
+                                    <div class="dropdown-card">
+
+                                        <img
+                                            src="assets/tele_person.jpg"
+                                            alt="Customer Support">
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </li>
+
+
+                        <li class="has-dropdown">
+
+                            <a href="#">
+                                Business
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </a>
+
+                        </li>
+
+
+                        <li class="has-dropdown">
+
+                            <a href="#">
+                                International
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </a>
+
+                        </li>
+
+
+                        <li class="has-dropdown">
+
+                            <a href="#">
+                                Customer Service
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </a>
+
+                        </li>
+
+
+                        <li class="has-dropdown">
+
+                            <a href="#">
+                                Company
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </a>
+
+                        </li>
+
+
+                        <li class="has-dropdown">
+
+                            <a href="#">
+                                Online Services
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </nav>
+
+            </div>
+
+
+            <div class="nav-right">
+
+                <a href="#" class="btn-account">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    My Account
+
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="hero-slider">
+
+            <div class="slide-content">
+
+                <span class="hero-tag">
+                    Digital Backbone
+                </span>
+
+                <h1>
+                    teleStream: SMART Streaming
+                </h1>
+
+                <p class="hero-tagline">
+                    Powered by Ethiopia's Digital Backbone!
+                </p>
+
+                <p>
+                    Beyond Entertainment - A multi-Sector Digital Content
+                    platform delivering high-speed cloud media to every screen.
+                </p>
+
+
+                <div class="hero-actions">
+
+                    <a href="#" class="btn-primary">
+                        Read More
+                    </a>
+
+                    <a href="#" class="btn-outline">
+                        Explore teleStream
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================== -->
+
+        <section class="stats-container">
+
+            <div class="stat-card">
+                <h2>86.9M</h2>
+                <p>Mobile Voice</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>51.5M</h2>
+                <p>Data and Internet</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>1M</h2>
+                <p>Fixed Broadband</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>719K</h2>
+                <p>Fixed Voice</p>
+            </div>
+
+            <div class="stat-card highlight">
+                <h2>90.1M</h2>
+                <p>Total Customers</p>
+            </div>
+
+        </section>
+
+        <!-- =================================================
+             WHAT'S NEW
+        ================================================== -->
+
+        <section class="content-section">
+
+            <div class="section-header">
+
+                <h2>What's New</h2>
+
+                <p>
+                    Explore how we're actively shaping Ethiopia's digital
+                    future with our latest products, services, and initiatives.
+                </p>
+
+            </div>
+
+
+            <div class="cards-grid">
+
+
+                <div class="info-card">
+
+                    <div class="card-image">
+
+                        <img
+                            src="assets/investement_in_ethio.jpg"
+                            alt="Ethio telecom CEO and Italian Ambassadors">
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Ethio telecom and British International Investment
+                        </h3>
+
+                        <p>
+                            Strengthening international cooperation to expand
+                            modern infrastructure across the nation.
+                        </p>
+
+                        <a href="#" class="btn-card-outline">
+                            Read More
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="card-image">
+
+                        <img
+                            src="assets/ceo_ambassador.jpg"
+                            alt="Ethio telecom CEO and Italian Ambassadors">
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Ethio telecom CEO and Italian Ambassadors
+                        </h3>
+
+                        <p>
+                            Ethio telecom CEO engages in high-level discussions
+                            regarding digital growth initiatives.
+                        </p>
+
+                        <a href="#" class="btn-card-outline">
+                            Read More
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="card-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=600&auto=format&fit=crop"
+                            alt="Smart Mobility">
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Smart Mobility & Seamless Payments
+                        </h3>
+
+                        <p>
+                            Powering Ethiopia Expressway with telebirr
+                            RFID-powered toll payment integration.
+                        </p>
+
+                        <a href="#" class="btn-card-outline">
+                            Read More
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PRODUCTS & SERVICES
+        ================================================== -->
+
+        <section class="content-section">
+
+            <div class="section-header">
+
+                <h2>Products & Services</h2>
+
+            </div>
+
+
+            <div class="cards-grid">
+
+
+                <div class="info-card">
+
+                    <div class="card-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop"
+                            alt="Remittance">
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            International Remittance
+                        </h3>
+
+                        <p>
+                            We deliver your loved ones' trust across the
+                            horizon directly to your phone via telebirr.
+                        </p>
+
+                        <a href="#" class="btn-card-outline">
+                            Read More
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="card-image">
+
+                        <img
+                            src="assets/packages.jpg"
+                            alt="Mobile Packages">
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Mobile Packages
+                        </h3>
+
+                        <p>
+                            Do more, be more! Premium voice, SMS, and
+                            high-speed data bundles designed for less.
+                        </p>
+
+                        <a href="#" class="btn-card-outline">
+                            Read More
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="card-image">
+
+                        <img
+                            src="assets/zemen.jpg"
+                            alt="Zemen GEBEYA">
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Zemen GEBEYA
+                        </h3>
+
+                        <p>
+                            A hassle-free e-commerce shopping experience
+                            directly from the comfort of your home.
+                        </p>
+
+                        <a href="#" class="btn-card-outline">
+                            Read More
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             OUR COMMITMENT
+        ================================================== -->
+
+        <section class="content-section">
+
+            <div class="section-header">
+
+                <h2>Our Commitment!</h2>
+
+                <p>
+                    Building a sustainable future by nurturing our environment,
+                    uplifting communities, and championing education.
+                </p>
+
+            </div>
+
+
+            <div class="cards-grid">
+
+
+                <div class="info-card">
+
+                    <div class="card-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=600&auto=format&fit=crop"
+                            alt="Greener Tomorrow">
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Greener Tomorrow
+                        </h3>
+
+                        <p>
+                            Our commitment to sustainability drives our active
+                            participation in nationwide environmental initiatives.
+                        </p>
+
+                        <a href="#" class="btn-card-outline">
+                            Read More
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="card-image">
+
+                        <img
+                            src="assets/support.jpg"
+                            alt="Supporting Communities">
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Supporting Communities
+                        </h3>
+
+                        <p>
+                            Through employee volunteerism and corporate support,
+                            we proudly stand with our communities.
+                        </p>
+
+                        <a href="#" class="btn-card-outline">
+                            Read More
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="card-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=600&auto=format&fit=crop"
+                            alt="Fundraising">
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Free Fundraising Codes
+                        </h3>
+
+                        <p>
+                            Providing free short codes to aid humanitarian
+                            organizations and mega project fundraising.
+                        </p>
+
+                        <a href="#" class="btn-card-outline">
+                            Read More
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CYBER SECURITY
+        ================================================== -->
+
+        <section class="content-section">
+
+            <div class="section-header">
+
+                <h2>Cyber Security</h2>
+
+                <p>
+                    Be aware, be safe! Know the scams and learn how to
+                    protect yourself from fraud.
+                </p>
+
+            </div>
+
+
+            <div class="cards-grid">
+
+
+                <div class="info-card">
+
+                    <div class="card-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=600&auto=format&fit=crop"
+                            alt="Social Engineering">
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Social Engineering
+                        </h3>
+
+                        <p>
+                            Social engineering attacks trick users into
+                            sharing confidential PINs, passwords, or bank info.
+                        </p>
+
+                        <a href="#" class="btn-card-outline">
+                            Read More
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="card-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?q=80&w=600&auto=format&fit=crop"
+                            alt="SIM Lost">
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            SIM Lost
+                        </h3>
+
+                        <p>
+                            Report your lost SIM card immediately to prevent
+                            unauthorized access and fraudulent activity.
+                        </p>
+
+                        <a href="#" class="btn-card-outline">
+                            Read More
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="card-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?q=80&w=600&auto=format&fit=crop"
+                            alt="Vishing Call">
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            Vishing Call
+                        </h3>
+
+                        <p>
+                            A phone scam where fraudsters trick victims into
+                            sharing sensitive data or transferring funds.
+                        </p>
+
+                        <a href="#" class="btn-card-outline">
+                            Read More
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             OUR IMPACT
+        ================================================== -->
+
+        <section class="content-section">
+
+            <div class="section-header">
+
+                <h2 class="section-title-green">
+                    Our Impact
+                </h2>
+
+                <p>
+                    Discover how connectivity and digital solutions are
+                    driving real change, transforming lives, and empowering
+                    communities in every corner of Ethiopia.
+                </p>
+
+            </div>
+
+
+            <div class="carousel-wrapper">
+
+                <button
+                    class="carousel-arrow left"
+                    aria-label="Previous">
+
+                    <i class="fa-solid fa-chevron-left"></i>
+
+                </button>
+
+
+                <div class="cards-grid">
+
+
+                    <!-- VIDEO 1 -->
+
+                    <div class="video-card">
+
+                        <div class="iframe-container">
+
+                            <iframe
+                                src="https://www.youtube.com/embed/DHO8MGFsM00?enablejsapi=1"
+                                title="How to setup a teleStream?"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                                loading="lazy">
+                            </iframe>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <h3>
+                                How to setup a teleStream?
+                            </h3>
+
+                            <p>
+                                Learn how to setup teleStream and access
+                                streaming content.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- VIDEO 2 -->
+
+                    <div class="video-card">
+
+                        <div class="iframe-container">
+
+                            <iframe
+                                src="https://www.youtube.com/embed/V4BCKoIAdOQ?enablejsapi=1"
+                                title="How to Activate VoLTE on Tecno Devices"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                                loading="lazy">
+                            </iframe>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <h3>
+                                How to Activate VoLTE on Tecno Devices
+                            </h3>
+
+                            <p>
+                                Follow quick steps to enable VoLTE features
+                                on Tecno mobile devices.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- VIDEO 3 -->
+
+                    <div class="video-card">
+
+                        <div class="iframe-container">
+
+                            <iframe
+                                src="https://www.youtube.com/embed/3z-b7ZQmZ0k?enablejsapi=1"
+                                title="የጥሪ ማሳመሪያ አገልግሎት | CRBT Service"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                                loading="lazy">
+                            </iframe>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <h3>
+                                የጥሪ ማሳመሪያ አገልግሎት | CRBT Service
+                            </h3>
+
+                            <p>
+                                Learn how to personalize your caller ring
+                                back tunes with Ethio telecom CRBT service.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="carousel-arrow right"
+                    aria-label="Next">
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <footer class="site-footer">
+
+
+            <div class="footer-columns">
+
+
+                <div class="footer-col">
+
+                    <h3>
+                        Online Services
+                    </h3>
+
+                    <ul>
+
+                        <li><a href="#">Developer Portal</a></li>
+                        <li><a href="#">teleHub</a></li>
+                        <li><a href="#">Postpaid bill complaint</a></li>
+                        <li><a href="#">ecare</a></li>
+                        <li><a href="#">DNS and webhosting</a></li>
+                        <li><a href="#">teleforum</a></li>
+                        <li><a href="#">Interactive self-support</a></li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="footer-col">
+
+                    <h3>
+                        Personal
+                    </h3>
+
+                    <ul>
+
+                        <li><a href="#">Getting Started</a></li>
+                        <li><a href="#">5G mobile packages</a></li>
+                        <li><a href="#">Recurring Mobile Package</a></li>
+                        <li><a href="#">Long Validity Package</a></li>
+                        <li><a href="#">Mobile Package</a></li>
+                        <li><a href="#">Fixed BB Internet</a></li>
+                        <li><a href="#">Airtime Top Up</a></li>
+                        <li><a href="#">Airtime and Package Credit</a></li>
+                        <li><a href="#">VAS</a></li>
+                        <li><a href="#">CRBT</a></li>
+                        <li><a href="#">Phones & Devices</a></li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="footer-col">
+
+                    <h3>
+                        Business
+                    </h3>
+
+                    <ul>
+
+                        <li><a href="#">5G mobile packages</a></li>
+                        <li><a href="#">telecloud</a></li>
+                        <li><a href="#">eSIM</a></li>
+                        <li><a href="#">Fixed Broadband</a></li>
+                        <li><a href="#">Business Mobile Packages</a></li>
+                        <li><a href="#">Mobile Packages</a></li>
+                        <li><a href="#">Mobile Group Offering Package</a></li>
+                        <li><a href="#">VPN</a></li>
+                        <li><a href="#">Corporate CRBT</a></li>
+                        <li><a href="#">DNS & Web Hosting</a></li>
+                        <li><a href="#">Mobile Conference Call</a></li>
+                        <li><a href="#">Wavelength Service</a></li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="footer-col">
+
+                    <h3>
+                        International
+                    </h3>
+
+                    <ul>
+
+                        <li><a href="#">Call & SMS</a></li>
+                        <li><a href="#">Roaming Service</a></li>
+                        <li><a href="#">Airtime Top Up</a></li>
+                        <li><a href="#">Data Service</a></li>
+                        <li><a href="#">VAS</a></li>
+                        <li><a href="#">Wholesale Business</a></li>
+                        <li><a href="#">International Visitors Plan</a></li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="footer-col">
+
+                    <h3>
+                        Customer Service
+                    </h3>
+
+                    <ul>
+
+                        <li><a href="#">Ashamtele</a></li>
+                        <li><a href="#">Shop Locations</a></li>
+                        <li><a href="#">Bill Payment Options</a></li>
+                        <li><a href="#">Bill Compliant</a></li>
+                        <li><a href="#">Ethio telecom App Store</a></li>
+                        <li><a href="#">ISupplier Portal</a></li>
+                        <li><a href="#">Ethio telecom - Local Speed Test</a></li>
+                        <li><a href="#">International - Ookla Speed Test</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="footer-col">
+
+                    <h3>
+                        Company
+                    </h3>
+
+                    <ul>
+
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">History</a></li>
+                        <li><a href="#">Annual Financial Statement</a></li>
+                        <li><a href="#">Gallery</a></li>
+                        <li><a href="#">CSR</a></li>
+                        <li><a href="#">Cyber Awareness</a></li>
+                        <li><a href="#">Corruption Whistleblowing</a></li>
+                        <li><a href="#">Supplier Portal</a></li>
+                        <li><a href="#">Partner's Portal</a></li>
+                        <li><a href="#">Franchise Partners Portal</a></li>
+                        <li><a href="#">Vacancy</a></li>
+                        <li><a href="#" class="highlight-link">Tender</a></li>
+                        <li><a href="#">Press Release</a></li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER CONTACT -->
+
+            <div class="footer-contact-bar">
+
+
+                <div class="qr-code-box">
+
+                    <i class="fa-solid fa-qrcode"></i>
+
+                    <span>
+                        Download telebirr App
+                    </span>
+
+                </div>
+
+
+                <div class="contact-info">
+
+                    <span>
+                        <i class="fa-solid fa-phone"></i>
+                        +251-994
+                    </span>
+
+                    <span>
+                        <i class="fa-solid fa-headset"></i>
+                        994
+                    </span>
+
+                    <span>
+                        <i class="fa-solid fa-envelope"></i>
+                        994@ethionet.et
+                    </span>
+
+                </div>
+
+
+                <div class="social-channels">
+
+                    <span>
+                        Follow US on
+                    </span>
+
+
+                    <div class="social-icons">
+
+                        <a href="#" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+
+                        <a href="#" aria-label="X/Twitter">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+
+                        <a href="#" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+
+                        <a href="#" aria-label="YouTube">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+
+                        <a href="#" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+
+                        <a href="#" aria-label="Telegram">
+                            <i class="fa-brands fa-telegram"></i>
+                        </a>
+
+                        <a href="#" aria-label="TikTok">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </footer>
+
     </div>
 
-    <div class="footer-links">
-      <div>
-        <strong>Explore</strong>
-        <a href="#personal">Personal</a>
-        <a href="#business">Business</a>
-        <a href="#telebirr">Telebirr</a>
-      </div>
 
-      <div>
-        <strong>Support</strong>
-        <a href="#help">Help center</a>
-        <a href="#stores">Service centers</a>
-        <a href="#contact">Contact us</a>
-      </div>
+    <!-- =====================================================
+         FLOATING BUTTONS
+    ====================================================== -->
 
-      <div>
-        <strong>Connect</strong>
-        <a href="#facebook">Facebook</a>
-        <a href="#linkedin">LinkedIn</a>
-        <a href="#youtube">YouTube</a>
-      </div>
+    <div
+        class="floating-btn left-float"
+        aria-label="Accessibility Settings">
+
+        <i class="fa-solid fa-universal-access"></i>
+
     </div>
 
-    <div class="footer-bottom">
-      <span>© 2026 Ethio Telecom. All rights reserved.</span>
-      <span><a href="#privacy">Privacy</a> <a href="#terms">Terms</a></span>
+
+    <div
+        class="floating-btn right-float"
+        aria-label="Support Center">
+
+        <i class="fa-solid fa-headset"></i>
+
     </div>
-  </footer>
+
+
+    <!-- =====================================================
+         SIDEBAR JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        const sidebarToggle =
+            document.getElementById("sidebarToggle");
+
+        const sidebar =
+            document.getElementById("appSidebar");
+
+        const pageContainer =
+            document.getElementById("pageContainer");
+
+        const sidebarOverlay =
+            document.getElementById("sidebarOverlay");
+
+
+        let sidebarOpen = true;
+
+
+        function openSidebar() {
+
+            sidebarOpen = true;
+
+            sidebar.classList.remove("sidebar-hidden");
+
+            sidebar.classList.add("sidebar-visible");
+
+            pageContainer.classList.remove("sidebar-closed");
+
+            sidebarOverlay.classList.add("show");
+
+            sidebarToggle.setAttribute(
+                "aria-expanded",
+                "true"
+            );
+
+            sidebarToggle.setAttribute(
+                "aria-label",
+                "Close sidebar"
+            );
+
+            sidebarToggle.innerHTML =
+                '<i class="fa-solid fa-xmark"></i>';
+
+        }
+
+
+        function closeSidebar() {
+
+            sidebarOpen = false;
+
+            sidebar.classList.add("sidebar-hidden");
+
+            sidebar.classList.remove("sidebar-visible");
+
+            pageContainer.classList.add("sidebar-closed");
+
+            sidebarOverlay.classList.remove("show");
+
+            sidebarToggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            sidebarToggle.setAttribute(
+                "aria-label",
+                "Open sidebar"
+            );
+
+            sidebarToggle.innerHTML =
+                '<i class="fa-solid fa-bars"></i>';
+
+        }
+
+
+        sidebarToggle.addEventListener(
+            "click",
+            function () {
+
+                if (sidebarOpen) {
+
+                    closeSidebar();
+
+                } else {
+
+                    openSidebar();
+
+                }
+
+            }
+        );
+
+
+        sidebarOverlay.addEventListener(
+            "click",
+            function () {
+
+                closeSidebar();
+
+            }
+        );
+
+
+        /*
+         * Close sidebar when a sidebar menu item
+         * is selected on small screens.
+         */
+
+        const sidebarLinks =
+            document.querySelectorAll(
+                ".sidebar-nav a"
+            );
+
+
+        sidebarLinks.forEach(function(link) {
+
+            link.addEventListener(
+                "click",
+                function() {
+
+                    if (
+                        window.innerWidth <= 600
+                    ) {
+
+                        closeSidebar();
+
+                    }
+
+                }
+            );
+
+        });
+
+
+        /*
+         * Keyboard support:
+         * Press ESC to close sidebar.
+         */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Escape" &&
+                    sidebarOpen
+                ) {
+
+                    closeSidebar();
+
+                }
+
+            }
+        );
+
+    </script>
 
 </body>
 </html>
+```

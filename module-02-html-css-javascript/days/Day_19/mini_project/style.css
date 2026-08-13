@@ -15,7 +15,7 @@ html {
 body {
     font-family: Arial, Helvetica, sans-serif;
     background: #f5f7fa;
-    color: #1f2937;
+    color: #0b3d6e;
     line-height: 1.6;
 
     transition:
@@ -118,12 +118,6 @@ section {
     transform: translateX(0);
 }
 
-
-
-/* ==========================================
-   SIDEBAR HEADER
-========================================== */
-
 .sidebar-header {
     display: flex;
 
@@ -216,16 +210,6 @@ section {
 
     padding-left: 22px;
 }
-
-.sidebar-nav a:active {
-    transform: translateX(2px);
-}
-
-
-
-/* ==========================================
-   SIDEBAR BOTTOM
-========================================== */
 
 .sidebar-bottom {
     margin-top: auto;
@@ -627,10 +611,55 @@ main {
     color: #6b7280;
 }
 
+.list-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
 #search {
     width: 250px;
 }
 
+
+
+/* ==========================================
+   CLEAR ALL BUTTON
+========================================== */
+
+.clear-all-btn {
+    border: none;
+    padding: 12px 16px;
+    border-radius: 7px;
+
+    background: #0b3d6e;
+    color: white;
+
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.clear-all-btn:hover {
+    background: #062d52;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 14px rgba(6, 45, 82, 0.3);
+}
+
+.clear-all-btn:active {
+    transform: translateY(0);
+}
 
 
 /* ==========================================
@@ -701,7 +730,7 @@ main {
 }
 
 .item-info p {
-    color: #6b7280;
+    color: #42627a;
 
     font-size: 14px;
 }
@@ -729,9 +758,8 @@ main {
 .delete-btn {
     border: none;
 
-    background: #fee2e2;
-
-    color: #dc2626;
+    background: #0b3d6e;
+    color: white;
 
     padding: 8px 12px;
 
@@ -748,13 +776,13 @@ main {
 }
 
 .delete-btn:hover {
-    background: #fecaca;
+    background: #062d52;
 
     transform: scale(1.05);
 
     box-shadow:
-        0 4px 8px
-        rgba(220, 38, 38, 0.15);
+        0 4px 10px
+        rgba(6, 45, 82, 0.3);
 }
 
 
@@ -1027,15 +1055,6 @@ body.dark #category-hint {
     color: #60a5fa;
 }
 
-body.dark .summary-card:hover,
-body.dark .recommendation-card:hover,
-body.dark .add-section:hover,
-body.dark .shopping-section:hover {
-    box-shadow:
-        0 16px 35px
-        rgba(0, 0, 0, 0.50);
-}
-
 
 
 /* ==========================================
@@ -1057,6 +1076,30 @@ body.dark .shopping-section:hover {
     .footer-content {
         grid-template-columns:
             1fr 1fr;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .section-top {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .list-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    #search {
+        width: 100%;
+    }
+
+    .clear-all-btn {
+        width: 100%;
     }
 }
 
@@ -1095,16 +1138,6 @@ body.dark .shopping-section:hover {
 
     .summary {
         grid-template-columns: 1fr;
-    }
-
-    .section-top {
-        flex-direction: column;
-
-        align-items: stretch;
-    }
-
-    #search {
-        width: 100%;
     }
 
     .shopping-item {

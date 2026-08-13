@@ -12,11 +12,11 @@
   --color-footer-bg: #1c130e;
 
   /* Header Color Variations Per Page */
-  --header-home: #8b3e15;        /* Deep Terracotta Brown */
+  --header-home: #2e5a3c;        /* Deep Terracotta Brown */
   --header-menu: #2e5a3c;        /* Ethiopian Coffee Garden Green */
-  --header-about: #70281b;       /* Berbere Spice Red */
-  --header-contact: #3b4252;     /* Warm Slate Gray */
-  --header-reservation: #b3591b; /* Warm Ochre Amber */
+  --header-about: #2e5a3c;       /* Berbere Spice Red */
+  --header-contact: #2e5a3c;     /* Warm Slate Gray */
+  --header-reservation: #2e5a3c; /* Warm Ochre Amber */
 
   --radius-card: 16px;
   --radius-btn: 24px;

@@ -43,6 +43,9 @@ const emptyMessage =
 const searchInput =
     document.querySelector("#search");
 
+const clearAllButton =
+    document.querySelector("#clear-all");
+
 const themeButton =
     document.querySelector("#theme-btn");
 
@@ -77,16 +80,16 @@ const aboutLink =
 // ==========================================
 
 const coffeeImage =
-    "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=500&q=80";
+    "assets/coffee.jpg";
 
 const vegetableImage =
-    "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=500&q=80";
+    "assets/vegetables.jpg";
 
 const breadImage =
-    "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=500&q=80";
+    "assets/bread.jpg";
 
 const bananaImage =
-    "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=500&q=80";
+    "assets/bananas.jpg";
 
 const defaultImage =
     vegetableImage;
@@ -582,6 +585,59 @@ list.addEventListener(
             updateSummary();
 
         }
+
+    }
+);
+
+
+
+// ==========================================
+// CLEAR ALL ITEMS
+// ==========================================
+
+clearAllButton.addEventListener(
+    "click",
+    function () {
+
+        const items =
+            list.querySelectorAll("li");
+
+
+        // Nothing to clear
+        if (items.length === 0) {
+
+            return;
+
+        }
+
+
+        const confirmed =
+            confirm(
+                "Are you sure you want to clear your entire shopping list?"
+            );
+
+
+        if (!confirmed) {
+
+            return;
+
+        }
+
+
+        // Remove all items
+        list.innerHTML = "";
+
+
+        // Reset everything
+        updateTotal();
+
+        updateSummary();
+
+        updateEmptyMessage();
+
+
+        // Clear search
+        searchInput.value = "";
 
     }
 );

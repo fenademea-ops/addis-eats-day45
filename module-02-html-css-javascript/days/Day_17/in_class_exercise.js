@@ -46,4 +46,4 @@ console.log(printReceipt(450, 180, 40));
 // Order 3: Spris Juice (90), Beyaynetu (210)
 console.log(printReceipt(90, 210)); 
 // Calculation: (300 subtotal * 0.90 discount) * 1.15 VAT = 310.50 ETB
-// Output: "#3: 310.50 ETB"
+// Output: "#3: 310.50 ETB" 
