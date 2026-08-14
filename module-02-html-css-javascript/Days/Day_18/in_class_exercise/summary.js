@@ -1,9 +1,6 @@
 import { withVat, format } from './pricing.js';
 import orders from './order.js';
 
-// Step 1: Use map + spread to calculate total per order.
-// Use reduce with destructuring { price, quantity } to total items.
-// Note: Number(price) handles string prices ("500" -> 500).
 const ordersWithTotal = orders.map(ord => {
   const subtotal = ord.oredrItem.reduce(
     (sum, { price, quantity }) => sum + Number(price) * quantity,

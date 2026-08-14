@@ -1,6 +1,4 @@
-// Functions for generating the TeleBirr transaction report
 
-// Separate credit transactions using filter()
 export function getCredits(transactions) {
     return transactions.filter(transaction => transaction.type === "credit");
 }

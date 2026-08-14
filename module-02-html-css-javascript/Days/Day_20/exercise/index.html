@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Exercise 5 - Fetch API</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            padding: 40px;
+        }
+
+        main {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #1769aa;
+        }
+
+        #status {
+            padding: 10px;
+            margin: 20px 0;
+        }
+
+        #postList {
+            padding-left: 20px;
+        }
+
+        #postList li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #f1f5f9;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            background: #1769aa;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0d4f82;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+
+        <h1>Exercise 5 - Fetch API</h1>
+
+        <button id="refreshBtn">Refresh</button>
+
+        <p id="status"></p>
+
+        <ul id="postList"></ul>
+
+    </main>
+
+
+    <script>
+
+        const status = document.querySelector("#status");
+        const postList = document.querySelector("#postList");
+        const refreshBtn = document.querySelector("#refreshBtn");
+
+
+        async function load() {
+
+            // Show Loading first
+            status.textContent = "Loading...";
+            postList.innerHTML = "";
+
+            try {
+
+                // Fetch data
+                const res = await fetch(
+                    "https://jsonplaceholder.typicode.com/posts"
+                );
+
+                // Check response
+                if (!res.ok) {
+                    throw new Error(`HTTP error: ${res.status}`);
+                }
+
+                // Convert to JSON
+                const data = await res.json();
+
+                // Render results
+                data.slice(0, 10).forEach(post => {
+
+                    const li = document.createElement("li");
+
+                    li.textContent = post.title;
+
+                    postList.append(li);
+                });
+
+                // Success message
+                status.textContent = "Data loaded successfully!";
+
+            } catch (error) {
+
+                // Error message
+                status.textContent =
+                    "Sorry, we could not load the data.";
+
+                status.classList.add("error");
+
+                console.error(error);
+
+            } finally {
+
+                // Loading is finished
+                console.log("Loading finished.");
+            }
+        }
+
+
+        // Bonus: refresh button
+        refreshBtn.addEventListener("click", load);
+
+
+        // Load data when page opens
+        load();
+
+    </script>
+
+</body>
+</html>
