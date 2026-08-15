@@ -1,0 +1,228 @@
+:root {
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
+  --text-primary: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --input-bg: #0f172a;
+  --primary-color: #10b981;
+  --primary-hover: #059669;
+  --secondary-color: #6366f1;
+  --secondary-hover: #4f46e5;
+  --error-color: #f87171;
+  --error-bg: rgba(239, 68, 68, 0.15);
+  --success-color: #34d399;
+  --success-bg: rgba(16, 185, 129, 0.15);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.app-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 28px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+.app-header h2 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.status-line {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.status-line.loading {
+  background-color: var(--input-bg);
+  color: var(--text-muted);
+  border: 1px dashed var(--border-color);
+}
+
+.status-line.success {
+  background-color: var(--success-bg);
+  color: var(--success-color);
+  border: 1px solid var(--primary-color);
+}
+
+.status-line.error {
+  background-color: var(--error-bg);
+  color: var(--error-color);
+  border: 1px solid var(--error-color);
+}
+
+.section {
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.section h3 {
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+input, select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+input:focus, select:focus {
+  border-color: var(--primary-color);
+}
+
+button {
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  border: none;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#convert-btn {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  font-size: 0.8rem;
+  padding: 6px 12px;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--secondary-hover);
+}
+
+.result-box {
+  margin-top: 16px;
+  padding: 12px;
+  background-color: var(--input-bg);
+  border: 1px solid var(--primary-color);
+  border-radius: var(--radius);
+  color: var(--success-color);
+  font-weight: 700;
+  text-align: center;
+}
+
+.result-box.error-result {
+  border-color: var(--error-color);
+  color: var(--error-color);
+}
+
+.hidden {
+  display: none;
+}
+
+.watchlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.watchlist-header h3 {
+  margin-bottom: 0;
+}
+
+.watchlist-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.watchlist-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--input-bg);
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+}
+
+.watchlist-info strong {
+  font-size: 0.95rem;
+  display: block;
+}
+
+.watchlist-info .rate-info {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.btn-delete {
+  background: transparent;
+  color: var(--error-color);
+  font-size: 1rem;
+  padding: 4px 8px;
+}
+
+.btn-delete:hover {
+  background-color: var(--error-bg);
+}
+
+.empty-state {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: center;
+  padding: 12px 0;
+}

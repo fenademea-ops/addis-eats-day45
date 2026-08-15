@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birr Watch</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-card">
+    <h2>Birr Watch 🇪🇹</h2>
+
+    <!-- Status Line -->
+    <div id="status-line" class="status-line loading">Initializing...</div>
+
+    <!-- Convert Form -->
+    <section class="section">
+      <h3>Currency Converter</h3>
+      <form id="convert-form">
+        <div class="form-group">
+          <label for="amount">Amount (ETB):</label>
+          <input type="number" id="amount" placeholder="e.g. 100" min="0.01" step="any" required>
+        </div>
+
+        <div class="form-group">
+          <label for="target-currency">Target Currency:</label>
+          <select id="target-currency" disabled>
+            <option value="">-- Select Currency --</option>
+          </select>
+        </div>
+
+        <button type="submit" id="convert-btn" disabled>Convert</button>
+      </form>
+
+      <!-- Result Container -->
+      <div id="conversion-result" class="result-box hidden"></div>
+    </section>
+
+    <!-- Watchlist -->
+    <section class="section">
+      <div class="watchlist-header">
+        <h3>Watchlist</h3>
+        <button id="add-watchlist-btn" type="button" disabled>+ Add to Watchlist</button>
+      </div>
+
+      <ul id="watchlist-ul" class="watchlist-list">
+        <!-- Watchlist items will render here dynamically -->
+      </ul>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

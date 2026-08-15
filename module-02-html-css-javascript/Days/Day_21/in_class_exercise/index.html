@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Form</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Signup Form</h1>
+
+        <form id="signupForm">
+
+            <!-- Full Name -->
+            <label for="name">Full Name</label>
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name"
+            >
+
+            <div id="nameError" class="error"></div>
+
+
+            <!-- Phone Number -->
+            <label for="phone">Phone Number</label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="09XXXXXXXX"
+            >
+
+            <div id="phoneError" class="error"></div>
+
+
+            <!-- Submit -->
+            <button type="submit">Submit</button>
+
+        </form>
+
+
+        <!-- Signup Information -->
+        <div class="info">
+
+            <h2>Signup Information</h2>
+
+            <p id="count">Loading...</p>
+
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>

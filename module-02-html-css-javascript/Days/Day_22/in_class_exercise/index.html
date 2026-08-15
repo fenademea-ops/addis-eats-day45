@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birr Watch</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="card">
+    <header class="app-header">
+      <h2>Birr Watch 🇪🇹</h2>
+      <!-- Status Line: Loading, Success, Error -->
+      <div id="status-line" class="status-line loading" aria-live="polite">Fetching exchange rates...</div>
+    </header>
+
+    <!-- Convert Form -->
+    <section class="section">
+      <h3>Currency Converter</h3>
+      <form id="convert-form" class="convert-form" novalidate>
+        <div class="form-group">
+          <label for="amount">Amount (ETB)</label>
+          <input type="number" id="amount" min="0.01" step="any" placeholder="100" required>
+        </div>
+
+        <div class="form-group">
+          <label for="target-currency">Target Currency</label>
+          <div class="select-wrapper">
+            <select id="target-currency" required disabled>
+              <option value="">-- Select Currency --</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" id="convert-btn" class="btn-primary" disabled>Convert</button>
+      </form>
+
+      <!-- Conversion Result -->
+      <div id="conversion-result" class="result-box hidden" aria-live="polite"></div>
+    </section>
+
+    <!-- Watchlist Section -->
+    <section class="section">
+      <div class="watchlist-header">
+        <h3>Currency Watchlist</h3>
+        <button id="add-watchlist-btn" class="btn-secondary" disabled>+ Add Selected to Watchlist</button>
+      </div>
+
+      <div id="watchlist-container" class="watchlist-container">
+        <p class="empty-msg">No currencies in your watchlist yet.</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
