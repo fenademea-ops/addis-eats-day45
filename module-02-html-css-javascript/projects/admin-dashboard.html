@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Addis Eats</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="admin.css">
+  
+</head>
+<body class="admin-body">
+
+  <div class="admin-sidebar-backdrop" id="adminSidebarBackdrop"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+      <a href="admin-dashboard.html" class="admin-brand" style="margin: 0; padding: 0; border: none;">
+        <span>🍲</span>
+        <span>Addis Eats</span>
+      </a>
+      <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close Sidebar" title="Close Menu">
+        ✕
+      </button>
+    </div>
+
+    <nav class="admin-nav">
+      <button class="admin-nav-item active" data-section="analyticsSection">
+        <span>📊</span> Dashboard & Analytics
+      </button>
+      <button class="admin-nav-item" data-section="ordersSection">
+        <span>📦</span> Orders Pipeline (<span id="sidebarPendingCount">0</span>)
+      </button>
+      <button class="admin-nav-item" data-section="dishesSection">
+        <span>🍽️</span> Menu Management (CRUD)
+      </button>
+      <button class="admin-nav-item" data-section="categoriesSection">
+        <span>⚙️</span> 15-Category Controller
+      </button>
+    </nav>
+
+    <div class="admin-sidebar-footer">
+      <a href="index.html" class="admin-nav-item" style="color: #cbd5e1;">
+        <span>🌐</span> Open Customer Store
+      </a>
+      <button id="resetDataBtn" class="admin-nav-item" style="color: #f59e0b;" title="Reset demo catalog">
+       
+      </button>
+      <button id="adminLogoutBtn" class="btn-logout">
+        <span>🚪</span> Sign Out
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN AREA -->
+  <div class="admin-main">
+    <header class="admin-topbar">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <button id="sidebarToggleBtn" class="sidebar-toggle-btn" aria-label="Toggle Navigation Sidebar" title="Toggle Sidebar Menu">
+          ☰
+        </button>
+        <h1 class="admin-topbar-title" id="pageTitle">Executive Analytics Dashboard</h1>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <button id="adminThemeToggleBtn" class="icon-btn" title="Toggle Theme">
+          <span id="adminThemeIcon">🌙</span>
+        </button>
+        <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--admin-border); padding: 6px 12px; border-radius: 9999px; font-size: 0.8rem; font-weight: 700;">
+          <span>👤</span> <span class="admin-badge-text">Administrator</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="admin-content">
+
+      <!-- SECTION 1: ANALYTICS -->
+      <section id="analyticsSection" class="admin-tab-content">
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <span class="kpi-title">Total Revenue</span>
+            <div class="kpi-val" id="kpiRevenue">0.00 ETB</div>
+            <span class="kpi-sub">Across all completed orders</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-title">Total Orders</span>
+            <div class="kpi-val" id="kpiOrdersCount">0</div>
+            <span class="kpi-sub">Lifetime customer orders</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-title">Average Order Value (AOV)</span>
+            <div class="kpi-val" id="kpiAOV">0.00 ETB</div>
+            <span class="kpi-sub">Mean spend per order</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-title">Active Orders in Kitchen</span>
+            <div class="kpi-val" id="kpiActiveKitchen" style="color: var(--admin-primary);">0</div>
+            <span class="kpi-sub">Pending / Preparing / Out for delivery</span>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+          <div class="admin-card">
+            <h3 class="admin-card-title" style="margin-bottom: 1rem;">Order Status Distribution</h3>
+            <div id="statusDistributionContainer" style="display: flex; flex-direction: column; gap: 0.75rem;"></div>
+          </div>
+
+          <div class="admin-card">
+            <h3 class="admin-card-title" style="margin-bottom: 1rem;">Top-Selling Dishes</h3>
+            <div id="topDishesContainer" style="display: flex; flex-direction: column; gap: 0.75rem;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: ORDERS PIPELINE -->
+      <section id="ordersSection" class="admin-tab-content" style="display: none;">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <h2 class="admin-card-title">Live Kitchen & Customer Orders</h2>
+              <p style="font-size: 0.8rem; color: var(--admin-text-muted);">Manage real-time order lifecycle status</p>
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <input type="text" id="orderSearchInput" class="form-input" placeholder="Search orders..." style="max-width: 200px; padding: 6px 10px; font-size: 0.85rem;">
+              <select id="orderStatusFilter" class="form-select" style="max-width: 150px; padding: 6px 10px; font-size: 0.85rem;">
+                <option value="all">All Statuses</option>
+                <option value="pending">Pending</option>
+                <option value="preparing">Preparing</option>
+                <option value="delivering">Delivering</option>
+                <option value="delivered">Delivered</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-table" id="ordersTable">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Sub-City</th>
+                  <th>Items</th>
+                  <th>Total (ETB)</th>
+                  <th>Payment</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: MENU CRUD -->
+      <section id="dishesSection" class="admin-tab-content" style="display: none;">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <h2 class="admin-card-title">Menu Catalog & Stock Availability</h2>
+              <p style="font-size: 0.8rem; color: var(--admin-text-muted);">
+                Toggle <strong>Availability Switch</strong> when food runs out in the kitchen.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+              <input type="text" id="dishSearchInput" class="form-input" placeholder="Search dishes..." style="max-width: 200px; padding: 6px 10px; font-size: 0.85rem;">
+              <button id="openAddDishModalBtn" class="btn-admin btn-admin-primary">
+                <span>+</span> Add New Dish
+              </button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-table" id="dishesTable">
+              <thead>
+                <tr>
+                  <th>Dish</th>
+                  <th>Category</th>
+                  <th>Price (ETB)</th>
+                  <th>Stock</th>
+                  <th>Availability (In-Stock / Sold Out)</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="dishesTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: CATEGORY CONTROLLER -->
+      <section id="categoriesSection" class="admin-tab-content" style="display: none;">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <h2 class="admin-card-title">15-Category Operations Controller</h2>
+              <p style="font-size: 0.8rem; color: var(--admin-text-muted);">
+                Enable or disable entire food categories (e.g. disable Breakfast after 11 AM, or Pizza during oven maintenance).
+              </p>
+            </div>
+          </div>
+
+          <div class="category-manager-grid" id="categoryManagerGrid"></div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ADD / EDIT DISH MODAL -->
+  <div class="modal-backdrop" id="dishModalBackdrop">
+    <div class="modal-box" style="max-width: 600px;">
+      <div class="modal-header">
+        <h2 class="modal-title" id="dishModalTitle">Add New Dish</h2>
+        <button class="drawer-close-btn" id="closeDishModalBtn">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="dishForm">
+          <input type="hidden" id="dishFormId">
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="dishFormName">Dish Name (English) *</label>
+              <input type="text" id="dishFormName" class="form-input" placeholder="e.g., Special Kitfo" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="dishFormNameAm">Amharic Name *</label>
+              <input type="text" id="dishFormNameAm" class="form-input" placeholder="e.g., ልዩ ክትፎ" required>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="dishFormPrice">Price (ETB) *</label>
+              <input type="number" id="dishFormPrice" class="form-input" min="1" step="0.5" placeholder="450" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="dishFormCategory">Category *</label>
+              <select id="dishFormCategory" class="form-select" required></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="dishFormStock">Initial Stock *</label>
+              <input type="number" id="dishFormStock" class="form-input" min="0" value="20" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="dishFormDesc">Description (English) *</label>
+            <textarea id="dishFormDesc" class="form-textarea" rows="2" placeholder="Delicious tender beef..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="dishFormIngredients">Key Ingredients (Comma separated)</label>
+            <input type="text" id="dishFormIngredients" class="form-input" placeholder="Beef, Mitmita, Kibbeh, Ayib, Injera">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="dishFormImage">Image Path</label>
+              <input type="text" id="dishFormImage" class="form-input" placeholder="images/kitfo.svg" value="images/kitfo.svg">
+            </div>
+            <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1.5rem;">
+              <input type="checkbox" id="dishFormFasting" style="width: 18px; height: 18px;">
+              <label for="dishFormFasting" style="font-size: 0.85rem; font-weight: 600; cursor: pointer;">🌿 Fasting Dish (የጾም)</label>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1.5rem;">
+            <button type="button" class="btn-pill" id="cancelDishFormBtn">Cancel</button>
+            <button type="submit" class="btn-admin btn-admin-primary">Save Dish</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORDER DETAILS MODAL -->
+  <div class="modal-backdrop" id="adminOrderModalBackdrop">
+    <div class="modal-box" style="max-width: 550px;">
+      <div class="modal-header">
+        <h2 class="modal-title" id="adminOrderModalTitle">Order Details</h2>
+        <button class="drawer-close-btn" id="closeAdminOrderModalBtn">✕</button>
+      </div>
+      <div class="modal-body" id="adminOrderModalContent"></div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="adminToastContainer"></div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

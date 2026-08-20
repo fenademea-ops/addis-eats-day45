@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Addis Eats | Food Ordering for Addis Ababa</title>
+  <meta name="description" content="Order authentic Ethiopian cuisine, fast food, and drinks across Addis Ababa with fast sub-city delivery and Telebirr/CBE payment.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container">
+      <nav class="nav-bar">
+        <a href="index.html" class="brand-logo" id="logoLink">
+          <div class="brand-icon">🍲</div>
+          <span>Addis Eats</span>
+          <span class="brand-tag">አዲስ</span>
+        </a>
+
+        <div class="nav-actions">
+          <button id="langToggleBtn" class="btn-pill" title="Toggle Language (English / አማርኛ)" aria-label="Toggle Language">
+            🌍 <span id="langLabel">አማርኛ</span>
+          </button>
+
+          <button id="themeToggleBtn" class="icon-btn" title="Toggle Theme" aria-label="Toggle Dark or Light Theme">
+            <span id="themeIcon">🌙</span>
+          </button>
+
+          <button id="orderHistoryBtn" class="btn-pill" title="View Past Orders" aria-label="View Order History">
+            📋 <span data-i18n="historyBtn">Orders</span>
+          </button>
+
+          <button id="cartBtn" class="icon-btn" title="View Cart" aria-label="Shopping Cart">
+            🛒
+            <span id="cartCountBadge" class="cart-badge">0</span>
+          </button>
+
+          <a href="admin-login.html" class="admin-nav-link" id="adminPortalBtn" title="Restaurant Admin Portal">
+            🔐 <span data-i18n="adminLink">Admin</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">
+        ✨ <span data-i18n="heroBadge">Addis Ababa's Premier Kitchen & Delivery</span>
+      </div>
+      <h1 class="hero-title">
+        <span data-i18n="heroTitle1">Authentic Habesha Flavors,</span><br>
+        <span data-i18n="heroTitle2">Delivered to Your Doorstep.</span>
+      </h1>
+      <p class="hero-subtitle" data-i18n="heroSubtitle">
+        Explore 15 categories of authentic Ethiopian dishes, clay-pot wats, sizzling tibs, stone-baked pizzas, and natural juices across all Addis sub-cities.
+      </p>
+
+      <div class="search-wrapper">
+        <span class="search-icon-left">🔍</span>
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="Search by dish name (e.g., Doro Wat, Shiro, Kitfo) or ingredients..." 
+          data-i18n-placeholder="searchPlaceholder"
+          autocomplete="off"
+        >
+        <button id="searchClearBtn" class="search-clear-btn" aria-label="Clear Search">✕</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORY TABS -->
+  <section class="categories-section">
+    <div class="container">
+      <div class="category-scroll" id="categoryTabsContainer" role="tablist">
+        <button class="category-pill active" data-category="all" role="tab" aria-selected="true">
+          <span>✨</span>
+          <span data-i18n="catAll">All Dishes</span>
+          <span class="cat-count" id="allCount">0</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU CATALOG -->
+  <main class="menu-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" id="activeCategoryHeading" data-i18n="exploreMenu">Explore Our Menu</h2>
+        <span id="resultsCount" style="font-size: 0.85rem; color: var(--text-muted);">Showing all dishes</span>
+      </div>
+
+      <div class="dish-grid" id="dishGrid">
+        <div class="dish-card skeleton" style="height: 380px;"></div>
+        <div class="dish-card skeleton" style="height: 380px;"></div>
+        <div class="dish-card skeleton" style="height: 380px;"></div>
+        <div class="dish-card skeleton" style="height: 380px;"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- CART DRAWER -->
+  <div class="drawer-backdrop" id="cartBackdrop">
+    <aside class="drawer" id="cartDrawer" aria-label="Shopping Cart">
+      <div class="drawer-header">
+        <h2 class="drawer-title">
+          <span>🛒</span>
+          <span data-i18n="cartTitle">Your Cart</span>
+          <span id="cartDrawerCount" style="font-size: 0.85rem; color: var(--text-muted);">(0 items)</span>
+        </h2>
+        <button class="drawer-close-btn" id="closeCartBtn" aria-label="Close Cart">✕</button>
+      </div>
+
+      <div class="cart-items-list" id="cartItemsContainer"></div>
+
+      <div class="cart-footer" id="cartFooter">
+        <div class="promo-box">
+          <input type="text" id="promoInput" class="promo-input" placeholder="PROMO CODE (e.g. HABESHA10)" data-i18n-placeholder="promoPlaceholder">
+          <button id="applyPromoBtn" class="btn-apply-promo" data-i18n="applyPromo">Apply</button>
+        </div>
+        <div id="promoMessage" style="font-size: 0.75rem; margin-top: -6px; margin-bottom: 8px; display: none;"></div>
+
+        <div class="summary-row">
+          <span data-i18n="subtotal">Subtotal:</span>
+          <span id="cartSubtotal" class="val">0.00 ETB</span>
+        </div>
+        <div class="summary-row">
+          <span data-i18n="estDeliveryFee">Est. Delivery Fee:</span>
+          <span id="cartDeliveryFee" class="val">100.00 ETB</span>
+        </div>
+        <div class="summary-row" id="discountRow" style="display: none; color: var(--emerald);">
+          <span data-i18n="discount">Promo Discount:</span>
+          <span id="cartDiscount" class="val">-0.00 ETB</span>
+        </div>
+        <div class="summary-row total">
+          <span data-i18n="grandTotal">Grand Total:</span>
+          <span id="cartTotal" class="val">0.00 ETB</span>
+        </div>
+
+        <button id="openCheckoutBtn" class="btn-checkout">
+          <span data-i18n="proceedCheckout">Proceed to Checkout</span>
+          <span>➔</span>
+        </button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ORDER HISTORY DRAWER -->
+  <div class="drawer-backdrop" id="historyBackdrop">
+    <aside class="drawer" id="historyDrawer" aria-label="Order History">
+      <div class="drawer-header">
+        <h2 class="drawer-title">
+          <span>📋</span>
+          <span data-i18n="orderHistoryTitle">Past Orders</span>
+        </h2>
+        <button class="drawer-close-btn" id="closeHistoryBtn" aria-label="Close Order History">✕</button>
+      </div>
+      <div class="cart-items-list" id="orderHistoryContainer"></div>
+    </aside>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="modal-backdrop" id="checkoutModalBackdrop">
+    <div class="modal-box" id="checkoutModal">
+      <div class="modal-header">
+        <h2 class="modal-title">📦 <span data-i18n="checkoutTitle">Addis Delivery & Checkout</span></h2>
+        <button class="drawer-close-btn" id="closeCheckoutModalBtn" aria-label="Close Checkout Modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="checkoutForm">
+          <div class="form-group">
+            <label class="form-label" for="custName" data-i18n="lblFullName">Full Name *</label>
+            <input type="text" id="custName" class="form-input" placeholder="e.g., Abebe Bikila" required>
+            <div class="form-error" id="nameError" data-i18n="errName">Please enter your full name.</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="custPhone" data-i18n="lblPhone">Ethiopian Phone Number *</label>
+            <input type="tel" id="custPhone" class="form-input" placeholder="0911234567 or 0711234567" required>
+            <div class="form-error" id="phoneError" data-i18n="errPhone">Enter a valid Ethiopian number (09... or 07...).</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="custSubCity" data-i18n="lblSubCity">Addis Ababa Sub-City / Area *</label>
+            <select id="custSubCity" class="form-select" required>
+              <option value="Bole" data-fee="100">Bole (ቦሌ) — 100 ETB</option>
+              <option value="Kazanchis" data-fee="80">Kazanchis (ካዛንቺስ) — 80 ETB</option>
+              <option value="Piassa" data-fee="90">Piassa (ፒያሳ) — 90 ETB</option>
+              <option value="CMC" data-fee="150">CMC / Ayat (ሲኤምሲ) — 150 ETB</option>
+              <option value="Sarbet" data-fee="90">Sarbet (ሳርቤት) — 90 ETB</option>
+              <option value="Megenagna" data-fee="100">Megenagna (መገናኛ) — 100 ETB</option>
+              <option value="Gerji" data-fee="110">Gerji (ገርጂ) — 110 ETB</option>
+              <option value="22 Mazoriya" data-fee="90">22 Mazoriya (22 ማዞሪያ) — 90 ETB</option>
+              <option value="Lebu" data-fee="140">Lebu / Jomo (ለቡ / ጆሞ) — 140 ETB</option>
+              <option value="4 Kilo" data-fee="80">4 Kilo / Arat Kilo (4 ኪሎ) — 80 ETB</option>
+              <option value="Mexico" data-fee="80">Mexico (ሜክሲኮ) — 80 ETB</option>
+              <option value="Gotera" data-fee="90">Gotera (ጎተራ) — 90 ETB</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="custAddress" data-i18n="lblAddress">Specific Delivery Address / House No. *</label>
+            <input type="text" id="custAddress" class="form-input" placeholder="e.g., Near Atlas Hotel, Bldg 4, 3rd Floor" required>
+            <div class="form-error" id="addressError" data-i18n="errAddress">Please provide a specific delivery landmark.</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="custNotes" data-i18n="lblNotes">Special Cooking/Delivery Instructions (Optional)</label>
+            <textarea id="custNotes" class="form-textarea" rows="2" placeholder="e.g., Extra berbere sauce, call when arriving..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" data-i18n="lblPaymentMethod">Select Payment Method *</label>
+            <div class="payment-grid">
+              <div class="payment-card selected" data-method="telebirr">
+                <div class="payment-card-icon">📱</div>
+                <div class="payment-card-name">Telebirr</div>
+              </div>
+              <div class="payment-card" data-method="cbe_birr">
+                <div class="payment-card-icon">🏦</div>
+                <div class="payment-card-name">CBE Birr</div>
+              </div>
+              <div class="payment-card" data-method="cash">
+                <div class="payment-card-icon">💵</div>
+                <div class="payment-card-name">Cash on Delivery</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: var(--bg-subtle); padding: 12px; border-radius: var(--radius-md); margin-bottom: 1rem;">
+            <div class="summary-row">
+              <span data-i18n="deliveryFee">Delivery Fee:</span>
+              <span id="checkoutDeliveryFee">100.00 ETB</span>
+            </div>
+            <div class="summary-row total">
+              <span data-i18n="totalToPay">Total Amount to Pay:</span>
+              <span id="checkoutGrandTotal">0.00 ETB</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-checkout" id="submitOrderBtn">
+            <span data-i18n="placeOrder">Place Order & Proceed to Pay</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAYMENT SIMULATION MODAL -->
+  <div class="modal-backdrop" id="paymentSimModalBackdrop">
+    <div class="modal-box" style="text-align: center;">
+      <div class="modal-header">
+        <h2 class="modal-title" id="paymentModalTitle">📱 Telebirr Payment Gateway</h2>
+      </div>
+      <div class="modal-body">
+        <div id="paymentSimContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORDER CONFIRMATION & TRACKER MODAL -->
+  <div class="modal-backdrop" id="orderConfirmModalBackdrop">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 class="modal-title">🎉 <span data-i18n="orderConfirmedTitle">Order Confirmed!</span></h2>
+        <button class="drawer-close-btn" id="closeConfirmModalBtn">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="text-align: center; margin-bottom: 1rem;">
+          <div style="font-size: 2.5rem;">🛵</div>
+          <h3 id="confirmedOrderId" style="font-family: 'JetBrains Mono'; color: var(--primary);">ORDER #ADE-0000</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted);" data-i18n="orderLiveTrackingMsg">Your food is being prepared with love and will arrive shortly.</p>
+        </div>
+
+        <div class="order-tracker">
+          <div class="tracker-timeline">
+            <div class="tracker-progress-bar" id="liveProgressBar" style="width: 25%;"></div>
+            
+            <div class="tracker-step completed" id="stepPlaced">
+              <div class="step-icon-bubble">📝</div>
+              <span class="step-label">Placed</span>
+            </div>
+            <div class="tracker-step active" id="stepPreparing">
+              <div class="step-icon-bubble">👨‍🍳</div>
+              <span class="step-label">Cooking</span>
+            </div>
+            <div class="tracker-step" id="stepDelivering">
+              <div class="step-icon-bubble">🛵</div>
+              <span class="step-label">On Way</span>
+            </div>
+            <div class="tracker-step" id="stepDelivered">
+              <div class="step-icon-bubble">✅</div>
+              <span class="step-label">Arrived</span>
+            </div>
+          </div>
+          <div style="text-align: center; font-size: 0.85rem; font-weight: 700; color: var(--primary);" id="liveEtaText">
+            ⏱️ Estimated Delivery: 25-35 mins
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem;">
+          <button id="viewInvoiceBtn" class="btn-pill" style="flex: 1; padding: 10px; text-align: center; background: var(--bg-subtle);">
+            📄 <span data-i18n="viewReceipt">Print Tax Invoice</span>
+          </button>
+          <button id="doneOrderBtn" class="btn-checkout" style="flex: 1; margin: 0; padding: 10px;">
+            <span data-i18n="continueShopping">Done</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAX INVOICE MODAL -->
+  <div class="modal-backdrop" id="invoiceModalBackdrop">
+    <div class="modal-box" style="max-width: 600px;">
+      <div class="modal-header">
+        <h2 class="modal-title">📄 Official Tax Receipt</h2>
+        <button class="drawer-close-btn" id="closeInvoiceModalBtn">✕</button>
+      </div>
+      <div class="modal-body" id="invoicePrintArea"></div>
+      <div style="padding: 1rem 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 0.5rem;">
+        <button id="printInvoiceActionBtn" class="btn-checkout" style="width: auto; padding: 8px 18px;">
+          🖨️ Print Receipt
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISH DETAIL MODAL -->
+  <div class="modal-backdrop" id="dishDetailModalBackdrop">
+    <div class="modal-box" id="dishDetailBox"></div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-logo" style="margin-bottom: 0.75rem;">
+            <div class="brand-icon">🍲</div>
+            <span>Addis Eats</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">
+            Addis Ababa's favorite digital dining and food ordering platform. Fresh ingredients, authentic heritage recipes, and swift delivery.
+          </p>
+        </div>
+        <div>
+          <h4 style="font-weight: 700; margin-bottom: 0.75rem;">Delivery Zones</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+            Bole • Kazanchis • Piassa • CMC • Sarbet • Megenagna • Gerji • 22 • Lebu • 4 Kilo • Mexico • Gotera
+          </p>
+        </div>
+        <div>
+          <h4 style="font-weight: 700; margin-bottom: 0.75rem;">Supported Payments</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+            📱 Telebirr Instant Pay<br>
+            🏦 Commercial Bank of Ethiopia (CBE Birr)<br>
+            💵 Cash on Delivery
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 Addis Eats. Built for IBT-QIYAS Full-Stack Development Program (Module 2).
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
