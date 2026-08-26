@@ -1211,7 +1211,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Small tablets and large phones */
+
 @media (min-width: 601px) {
   .container {
     padding: 0 1.25rem;

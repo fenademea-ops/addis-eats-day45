@@ -1,6 +1,4 @@
-/**
- * ADDIS EATS - Admin Authentication Logic
- */
+
 
 document.addEventListener('DOMContentLoaded', () => {
   if (sessionStorage.getItem('adminLoggedIn') === 'true') {
