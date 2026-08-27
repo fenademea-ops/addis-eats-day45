@@ -1,0 +1,21 @@
+.page { max-width: 640px; margin: 0 auto; padding: 40px 20px; }
+.header h1 { margin: 0; font-size: 2rem; }
+.subtitle { margin: 6px 0 0; color: #6b7280; font-size: 0.9rem; }
+.menus { display: grid; gap: 16px; margin-top: 28px; }
+
+.card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px; background: #fff; }
+.card-title { margin: 0 0 10px; font-size: 1.15rem; }
+
+.dish-list { list-style: none; margin: 0; padding: 0; }
+.dish { display: flex; justify-content: space-between; align-items: baseline;
+        gap: 16px; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+.dish:last-child { border-bottom: 0; }
+.dish-name { margin: 0; font-size: 1rem; font-weight: 500;
+             display: flex; align-items: center; gap: 8px; }
+.dish-price { margin: 0; color: #6b7280; font-variant-numeric: tabular-nums; }
+
+.badge { background: #b91c1c; color: #fff; border-radius: 999px;
+         padding: 2px 8px; font-size: 0.7rem; text-transform: uppercase;
+         letter-spacing: 0.05em; font-weight: 700; }
+
+.empty { margin: 0; font-style: italic; color: #6b7280; font-size: 0.9rem; }

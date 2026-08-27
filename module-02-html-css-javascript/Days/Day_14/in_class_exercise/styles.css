@@ -38,7 +38,7 @@ body {
 
 .nav-right {
   display: flex;
-  align-items: center;
+  align-items: relative;
   gap: 2rem;
 }
 
@@ -58,6 +58,7 @@ body {
 
 .nav-links a:hover {
   opacity: 0.85;
+  color: rgb(0,0,0);
 }
 
 .btn-reserve {
@@ -152,6 +153,10 @@ main {
 .badge-accent {
   background-color: #ca8a4b;
 }
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
 
 /* Card Media */
 .card-img {
@@ -167,7 +172,10 @@ main {
   object-fit: cover;
   display: block;
 }
-
+.card-img img:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
 /* Card Content Area */
 .card-content {
   flex: 1;
