@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "Doro Wat",
+    "category": "mains",
+    "price": 18.50,
+    "description": "Slow-cooked spicy chicken stew with berbere, served with a hard-boiled egg and injera."
+  },
+  {
+    "id": 2,
+    "name": "Sambusa",
+    "category": "starters",
+    "price": 6.00,
+    "description": "Crispy pastry shells stuffed with spiced lentils, green chilies, and onions."
+  },
+  {
+    "id": 3,
+    "name": "Special Kitfo",
+    "category": "specials",
+    "price": 21.00,
+    "description": "Minced lean beef seasoned with mitmita and niter kibbeh, served with ayib (cottage cheese) and gomen."
+  },
+  {
+    "id": 4,
+    "name": "Shiro Wat",
+    "category": "mains",
+    "price": 13.99,
+    "description": "Rich chickpea flour stew simmered with garlic, ginger, and berbere sauce."
+  },
+  {
+    "id": 5,
+    "name": "Tej",
+    "category": "drinks",
+    "price": 7.50,
+    "description": "Traditional Ethiopian fermented honey wine with a smooth, sweet finish."
+  },
+  {
+    "id": 6,
+    "name": "Ethiopian Coffee (Buna)",
+    "category": "drinks",
+    "price": 4.00,
+    "description": "Freshly roasted and brewed single-origin Arabica coffee served with popcorn."
+  },
+  {
+    "id": 7,
+    "name": "Tibs",
+    "category": "mains",
+    "price": 17.00,
+    "description": "Sautéed beef cubes cooked with onions, rosemary, jalapeños, and spiced butter."
+  },
+  {
+    "id": 8,
+    "name": "Sweet Injera Roll",
+    "category": "desserts",
+    "price": 6.50,
+    "description": "Lightly toasted injera drizzled with local honey and dusted with cinnamon."
+  }
+]
