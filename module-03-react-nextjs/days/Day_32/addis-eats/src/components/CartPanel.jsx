@@ -1,4 +1,5 @@
 import { useCartStore } from "../cart/cartStore";
+import { Link } from "react-router-dom";
 
 export default function CartPanel({ isOpen, onClose }) {
   // Pull state and actions directly from Zustand
@@ -44,7 +45,12 @@ export default function CartPanel({ isOpen, onClose }) {
 
             <div className="cart-footer">
               <h4>Total: {total.toFixed(2)} ETB</h4>
-              <button className="clear-btn" onClick={clearCart}>Clear Cart</button>
+              <div className="cart-actions">
+                <button className="clear-btn" onClick={clearCart}>Clear Cart</button>
+                <Link className="checkout-btn" to="/checkout" onClick={onClose}>
+                  Checkout
+                </Link>
+              </div>
             </div>
           </div>
         )}

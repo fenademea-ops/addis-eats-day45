@@ -1,0 +1,516 @@
+/* =========================
+   Custom Properties
+========================= */
+
+:root {
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+
+  --primary: #d97706;
+  --primary-hover: #b45309;
+  --accent: #dc2626;
+
+  --border: #e2e8f0;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  --radius: 12px;
+}
+
+/* =========================
+   Dark Mode
+========================= */
+
+[data-theme="dark"] {
+  --bg-main: #0f172a;
+  --bg-card: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border: #334155;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4);
+}
+
+/* =========================
+   Global Reset
+========================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* =========================
+   Header / Navbar
+========================= */
+
+header {
+  width: 100%;
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: var(--shadow-sm);
+}
+
+header nav {
+  max-width: 1200px;
+  min-height: 72px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* Logo */
+
+header nav > a:first-child {
+  color: var(--primary);
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+header nav > a:first-child:hover {
+  color: var(--primary-hover);
+}
+
+/* Navigation Links */
+
+header nav a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+header nav a:hover {
+  color: var(--primary);
+}
+
+header nav a.active {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* Navigation links container */
+
+header nav > div {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* =========================
+   Header Buttons
+========================= */
+
+header button,
+header .cart-badge {
+  background-color: var(--bg-main);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+
+  padding: 0.55rem 1rem;
+  border-radius: 9999px;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  transition: all 0.2s ease;
+}
+
+header button:hover,
+header .cart-badge:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+/* =========================
+   Main Content
+========================= */
+
+main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem;
+}
+
+/* =========================
+   Hero Section
+========================= */
+
+main h1 {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+
+main p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 1.75rem;
+}
+
+/* =========================
+   Buttons
+========================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--primary);
+  color: #ffffff;
+
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+
+  border-radius: var(--radius);
+  border: none;
+
+  text-decoration: none;
+  cursor: pointer;
+
+  box-shadow: var(--shadow-sm);
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  background-color: var(--primary-hover);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Only actual buttons with .btn get button styling */
+a.btn {
+  color: #ffffff;
+}
+
+/* =========================
+   Cards
+========================= */
+
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1.25rem;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+/* =========================
+   Menu
+========================= */
+
+.menu {
+  width: 100%;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+/* =========================
+   Category Bar
+========================= */
+
+.category-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.category-bar button {
+  background-color: var(--bg-card);
+  color: var(--text-main);
+
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+
+  padding: 0.55rem 1rem;
+
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.category-bar button:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.category-bar button.active {
+  background-color: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+/* =========================
+   Dish
+========================= */
+
+.dish {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+
+  box-shadow: var(--shadow-sm);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.dish:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.dish h2,
+.dish h3 {
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.dish p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.dish-price {
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+/* =========================
+   Cart
+========================= */
+
+.cart {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.cart h2 {
+  color: var(--text-main);
+  margin-bottom: 1rem;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cart-total {
+  margin-top: 1rem;
+  padding-top: 1rem;
+
+  border-top: 2px solid var(--border);
+
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.cart-total strong {
+  color: var(--primary);
+}
+
+/* =========================
+   Forms
+========================= */
+
+form {
+  width: 100%;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+
+  background-color: var(--bg-card);
+  color: var(--text-main);
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  font-size: 1rem;
+  outline: none;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgb(217 119 6 / 0.15);
+}
+
+label {
+  display: block;
+  margin-bottom: 0.4rem;
+
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* =========================
+   Footer
+========================= */
+
+footer {
+  width: 100%;
+  min-width: 1200px;
+
+  margin: 4rem auto 0;
+  padding: 2rem 1.5rem;
+
+  border-top: 1px solid var(--border);
+
+  color: var(--text-muted);
+  font-size: 0.875rem;
+background-color: #0f172a;
+  text-align: center;
+}
+
+/* =========================
+   Loading / Error
+========================= */
+
+.loading,
+.error {
+  padding: 2rem;
+  text-align: center;
+  border-radius: var(--radius);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+}
+
+.error {
+  color: var(--accent);
+}
+
+/* =========================
+   Responsive Design
+========================= */
+
+@media (max-width: 900px) {
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  header nav {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 650px) {
+  header nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  header nav > a:first-child {
+    width: 100%;
+    text-align: center;
+  }
+
+  header nav > div {
+    gap: 0.75rem;
+  }
+
+  main {
+    padding: 2.5rem 1rem;
+  }
+
+  main h1 {
+    font-size: 2.2rem;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-bar {
+    justify-content: center;
+  }
+}
