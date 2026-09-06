@@ -1,6 +1,7 @@
 import Header from './Header';
 import Dish from './Dish';
 
+
 const menuData = [
   { id: 1, name: 'Doro Wat', price: 350 },
   { id: 2, name: 'Shiro Tegabino', price: 180 },

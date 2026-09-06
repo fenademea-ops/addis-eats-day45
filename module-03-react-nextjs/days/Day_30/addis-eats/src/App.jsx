@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Menu from "./Menu";
 import CartPanel from "./components/CartPanel";
 import "./App.css";
+import "./index.css";
 
 export default function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
