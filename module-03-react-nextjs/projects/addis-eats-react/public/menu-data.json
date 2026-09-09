@@ -1,0 +1,168 @@
+[
+  {
+    "id": 1,
+    "name": "Doro Wat",
+    "category": "Ethiopian",
+    "description": "A traditional Ethiopian chicken stew cooked with berbere, onions and spices, served with injera.",
+    "ingredients": [
+      "Chicken",
+      "Berbere",
+      "Onion",
+      "Garlic",
+      "Ginger",
+      "Egg"
+    ],
+    "price": 350,
+    "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950",
+    "available": true,
+    "featured": true
+  },
+  {
+    "id": 2,
+    "name": "Special Tibs",
+    "category": "Ethiopian",
+    "description": "Tender pieces of beef sautéed with onions, peppers and Ethiopian spices.",
+    "ingredients": [
+      "Beef",
+      "Onion",
+      "Green Pepper",
+      "Tomato",
+      "Rosemary"
+    ],
+    "price": 420,
+    "image": "https://images.unsplash.com/photo-1547592180-85f173990554",
+    "available": true,
+    "featured": true
+  },
+  {
+    "id": 3,
+    "name": "Kitfo",
+    "category": "Ethiopian",
+    "description": "Minced beef seasoned with mitmita and seasoned butter, served in a traditional Ethiopian style.",
+    "ingredients": [
+      "Minced Beef",
+      "Mitmita",
+      "Spiced Butter",
+      "Ayib"
+    ],
+    "price": 450,
+    "image": "https://images.unsplash.com/photo-1544025162-d76694265947",
+    "available": true,
+    "featured": false
+  },
+  {
+    "id": 4,
+    "name": "Margherita Pizza",
+    "category": "Pizza",
+    "description": "Classic pizza topped with tomato sauce, mozzarella cheese and fresh basil.",
+    "ingredients": [
+      "Pizza Dough",
+      "Tomato Sauce",
+      "Mozzarella",
+      "Basil"
+    ],
+    "price": 380,
+    "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002",
+    "available": true,
+    "featured": true
+  },
+  {
+    "id": 5,
+    "name": "Pepperoni Pizza",
+    "category": "Pizza",
+    "description": "A delicious pizza topped with mozzarella cheese, tomato sauce and pepperoni.",
+    "ingredients": [
+      "Pizza Dough",
+      "Tomato Sauce",
+      "Mozzarella",
+      "Pepperoni"
+    ],
+    "price": 450,
+    "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e",
+    "available": true,
+    "featured": false
+  },
+  {
+    "id": 6,
+    "name": "Cheeseburger",
+    "category": "Burgers",
+    "description": "Juicy beef burger with melted cheese, lettuce, tomato and our special sauce.",
+    "ingredients": [
+      "Beef Patty",
+      "Cheese",
+      "Lettuce",
+      "Tomato",
+      "Onion",
+      "Burger Bun"
+    ],
+    "price": 300,
+    "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
+    "available": true,
+    "featured": true
+  },
+  {
+    "id": 7,
+    "name": "Classic Beef Burger",
+    "category": "Burgers",
+    "description": "Classic grilled beef burger served with fresh vegetables and special sauce.",
+    "ingredients": [
+      "Beef Patty",
+      "Lettuce",
+      "Tomato",
+      "Onion",
+      "Burger Bun"
+    ],
+    "price": 280,
+    "image": "https://images.unsplash.com/photo-1550547660-d9450f859349",
+    "available": true,
+    "featured": false
+  },
+  {
+    "id": 8,
+    "name": "Fresh Mango Juice",
+    "category": "Drinks",
+    "description": "Freshly prepared mango juice made from ripe mangoes.",
+    "ingredients": [
+      "Fresh Mango",
+      "Water",
+      "Ice"
+    ],
+    "price": 120,
+    "image": "https://images.unsplash.com/photo-1600271886742-f049cd451bba",
+    "available": true,
+    "featured": true
+  },
+  {
+    "id": 9,
+    "name": "Avocado Juice",
+    "category": "Drinks",
+    "description": "Creamy and refreshing avocado juice prepared fresh.",
+    "ingredients": [
+      "Avocado",
+      "Milk",
+      "Honey",
+      "Ice"
+    ],
+    "price": 140,
+    "image": "https://images.unsplash.com/photo-1551024709-8f23befc6f87",
+    "available": true,
+    "featured": false
+  },
+  {
+    "id": 10,
+    "name": "Fresh Mixed Juice",
+    "category": "Drinks",
+    "description": "A refreshing combination of fresh seasonal fruits.",
+    "ingredients": [
+      "Mango",
+      "Avocado",
+      "Papaya",
+      "Orange",
+      "Ice"
+    ],
+    "price": 160,
+    "image": "https://images.unsplash.com/photo-1546173159-315724a31696",
+    "available": true,
+    "featured": true
+  }
+]
