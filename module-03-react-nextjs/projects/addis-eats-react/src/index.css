@@ -168,3 +168,68 @@ button {
     height: 200px;
   }
 }
+/* =========================
+   Loading Skeleton
+========================= */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #eeeeee 25%,
+    #f7f7f7 50%,
+    #eeeeee 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 8px;
+}
+
+.skeleton-image {
+  width: 100%;
+  height: 220px;
+  border-radius: 0;
+}
+
+.skeleton-category {
+  width: 90px;
+  height: 28px;
+  margin-bottom: 14px;
+}
+
+.skeleton-title {
+  width: 65%;
+  height: 24px;
+  margin-bottom: 14px;
+}
+
+.skeleton-text {
+  width: 100%;
+  height: 14px;
+  margin-bottom: 8px;
+}
+
+.skeleton-text-short {
+  width: 75%;
+  margin-bottom: 20px;
+}
+
+.skeleton-price {
+  width: 70px;
+  height: 22px;
+}
+
+.skeleton-button {
+  width: 110px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}

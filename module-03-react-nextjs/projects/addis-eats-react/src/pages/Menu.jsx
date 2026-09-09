@@ -1,30 +1,37 @@
-import { useEffect, useState } from "react";
-import { fetchDishes } from "../api/dishes";
+import { useEffect } from "react";
 import DishCard from "../components/DishCard";
+import { useMenuStore } from "../stores/menuStore";
+import DishCardSkeleton from "../components/DishCardSkeleton";
 
 function Menu() {
-  const [dishes, setDishes] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const dishes = useMenuStore((state) => state.dishes);
+  const loading = useMenuStore((state) => state.loading);
+  const error = useMenuStore((state) => state.error);
+  const loadDishes = useMenuStore((state) => state.loadDishes);
 
   useEffect(() => {
-    async function loadDishes() {
-      try {
-        const data = await fetchDishes();
-        setDishes(data);
-      } catch (err) {
-        setError("Failed to load menu.");
-      } finally {
-        setLoading(false);
-      }
-    }
-
     loadDishes();
-  }, []);
+  }, [loadDishes]);
 
   if (loading) {
-    return <h2>Loading menu...</h2>;
-  }
+  return (
+    <main className="menu-page">
+      <div className="menu-container">
+        <h1 className="menu-title">Addis Eats Menu</h1>
+
+        <p className="menu-subtitle">
+          Loading delicious food for you...
+        </p>
+
+        <div className="food-grid">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <DishCardSkeleton key={index} />
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
 
   if (error) {
     return <h2>{error}</h2>;
