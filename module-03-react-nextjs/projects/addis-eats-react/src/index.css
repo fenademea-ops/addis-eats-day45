@@ -2,6 +2,42 @@
    GLOBAL
 ========================= */
 
+:root {
+  --page-bg: #fafafa;
+  --page-text: #222222;
+  --heading-text: #1f1f1f;
+  --muted-text: #595959;
+  --border: #eeeeee;
+  --surface: #ffffff;
+  --surface-soft: #f8f8f8;
+  --primary: #e85d04;
+  --primary-dark: #b84400;
+  --primary-soft: #fff2e9;
+  --hero-overlay: rgba(20, 20, 20, 0.78);
+  --shadow: rgba(0, 0, 0, 0.08);
+  --card-shadow: rgba(0, 0, 0, 0.08);
+  --footer-bg: #202020;
+  --footer-text: #ffffff;
+}
+
+:root[data-theme="dark"] {
+  --page-bg: #111111;
+  --page-text: #f7f1ea;
+  --heading-text: #fffaf6;
+  --muted-text: #c9bfb5;
+  --border: #302e2b;
+  --surface: #1c1b19;
+  --surface-soft: #221f1b;
+  --primary: #ff9f45;
+  --primary-dark: #d66d16;
+  --primary-soft: #312217;
+  --hero-overlay: rgba(0, 0, 0, 0.72);
+  --shadow: rgba(255, 171, 95, 0.16);
+  --card-shadow: rgba(0, 0, 0, 0.5);
+  --footer-bg: #171717;
+  --footer-text: #fffaf6;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -19,8 +55,8 @@ body {
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
-  background: #fafafa;
-  color: #222;
+  background: var(--page-bg);
+  color: var(--page-text);
 }
 
 a {
@@ -46,8 +82,8 @@ button {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: #ffffff;
-  border-bottom: 1px solid #eeeeee;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
 }
 
 .header-container {
@@ -62,7 +98,7 @@ button {
 }
 
 .logo {
-  color: #e85d04;
+  color: var(--primary);
   text-decoration: none;
   font-size: 1.6rem;
   font-weight: 800;
@@ -77,18 +113,39 @@ button {
 
 .main-nav a {
   position: relative;
-  color: #444;
+  color: var(--muted-text);
   text-decoration: none;
   font-weight: 600;
   transition: color 0.2s ease;
 }
 
 .main-nav a:hover {
-  color: #e85d04;
+  color: var(--primary);
 }
 
 .main-nav a.active {
-  color: #e85d04;
+  color: var(--primary);
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
+  color: var(--page-text);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 700;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--primary);
+}
+
+.theme-toggle-icon {
+  font-size: 1rem;
 }
 
 /* =========================

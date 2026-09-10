@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+import ThemeToggle from "../theme/ThemeToggle";
 
 function Header() {
   return (
@@ -28,6 +29,8 @@ function Header() {
           <NavLink to="/cart">
             Cart
           </NavLink>
+
+          <ThemeToggle />
         </nav>
       </div>
     </header>
