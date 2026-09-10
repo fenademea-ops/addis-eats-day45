@@ -1,6 +1,11 @@
 function DishCardSkeleton() {
   return (
-    <article className="food-card skeleton-card">
+    <article
+      className="food-card skeleton-card"
+      aria-label="Loading menu item"
+      aria-busy="true"
+      role="status"
+    >
       <div className="skeleton skeleton-image"></div>
 
       <div className="food-content">

@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Doro Wat",
     "category": "Ethiopian",
-    "description": "A traditional Ethiopian chicken stew cooked with berbere, onions and spices, served with injera.",
+    "description": "Traditional Ethiopian chicken stew made with berbere, onion and spices, served with injera.",
     "ingredients": [
       "Chicken",
       "Berbere",
@@ -13,24 +13,24 @@
       "Egg"
     ],
     "price": 350,
-    "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950",
+    "image": "/images/doro_wat.jpg",
     "available": true,
     "featured": true
   },
   {
     "id": 2,
-    "name": "Special Tibs",
+    "name": "Beyaynetu",
     "category": "Ethiopian",
-    "description": "Tender pieces of beef sautéed with onions, peppers and Ethiopian spices.",
+    "description": "A colorful combination of traditional Ethiopian vegetable and meat dishes served with injera.",
     "ingredients": [
-      "Beef",
-      "Onion",
-      "Green Pepper",
-      "Tomato",
-      "Rosemary"
+      "Injera",
+      "Lentils",
+      "Vegetables",
+      "Shiro",
+      "Meat"
     ],
-    "price": 420,
-    "image": "https://images.unsplash.com/photo-1547592180-85f173990554",
+    "price": 380,
+    "image": "/images/Beyaynetu.jpg",
     "available": true,
     "featured": true
   },
@@ -38,7 +38,7 @@
     "id": 3,
     "name": "Kitfo",
     "category": "Ethiopian",
-    "description": "Minced beef seasoned with mitmita and seasoned butter, served in a traditional Ethiopian style.",
+    "description": "Minced beef seasoned with mitmita and Ethiopian spiced butter, served in a traditional style.",
     "ingredients": [
       "Minced Beef",
       "Mitmita",
@@ -46,47 +46,132 @@
       "Ayib"
     ],
     "price": 450,
-    "image": "https://images.unsplash.com/photo-1544025162-d76694265947",
-    "available": true,
-    "featured": false
-  },
-  {
-    "id": 4,
-    "name": "Margherita Pizza",
-    "category": "Pizza",
-    "description": "Classic pizza topped with tomato sauce, mozzarella cheese and fresh basil.",
-    "ingredients": [
-      "Pizza Dough",
-      "Tomato Sauce",
-      "Mozzarella",
-      "Basil"
-    ],
-    "price": 380,
-    "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002",
+    "image": "/images/kitfo.jpg",
     "available": true,
     "featured": true
   },
   {
-    "id": 5,
-    "name": "Pepperoni Pizza",
-    "category": "Pizza",
-    "description": "A delicious pizza topped with mozzarella cheese, tomato sauce and pepperoni.",
+    "id": 4,
+    "name": "Shiro Bozenna",
+    "category": "Ethiopian",
+    "description": "Rich Ethiopian shiro stew prepared with traditional spices and served with injera.",
     "ingredients": [
-      "Pizza Dough",
-      "Tomato Sauce",
-      "Mozzarella",
-      "Pepperoni"
+      "Shiro",
+      "Onion",
+      "Garlic",
+      "Berbere",
+      "Oil"
     ],
-    "price": 450,
-    "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e",
+    "price": 280,
+    "image": "/images/shiro_bozena.jpg",
+    "available": true,
+    "featured": false
+  },
+  {
+    "id": 5,
+    "name": "Shiro Tegabino",
+    "category": "Ethiopian",
+    "description": "Traditional thick shiro prepared in a clay dish with Ethiopian spices.",
+    "ingredients": [
+      "Shiro",
+      "Onion",
+      "Garlic",
+      "Berbere",
+      "Oil"
+    ],
+    "price": 300,
+    "image": "/images/Shiro_Tegabino.jpg",
     "available": true,
     "featured": false
   },
   {
     "id": 6,
-    "name": "Cheeseburger",
+    "name": "Siga Key Wat",
+    "category": "Ethiopian",
+    "description": "Spicy Ethiopian beef stew cooked with berbere, onions and traditional spices.",
+    "ingredients": [
+      "Beef",
+      "Berbere",
+      "Onion",
+      "Garlic",
+      "Ginger"
+    ],
+    "price": 420,
+    "image": "/images/Siga_Key_Wat.jpg",
+    "available": true,
+    "featured": true
+  },
+  {
+    "id": 7,
+    "name": "Fish Tibs",
+    "category": "Ethiopian",
+    "description": "Fresh fish sautéed with onions, peppers and Ethiopian spices.",
+    "ingredients": [
+      "Fish",
+      "Onion",
+      "Green Pepper",
+      "Tomato",
+      "Spices"
+    ],
+    "price": 400,
+    "image": "/images/fish-tibs.jpg",
+    "available": true,
+    "featured": false
+  },
+  {
+    "id": 8,
+    "name": "Shekla Tibs",
+    "category": "Ethiopian",
+    "description": "Tender pieces of meat served sizzling with onions, peppers and Ethiopian spices.",
+    "ingredients": [
+      "Beef",
+      "Onion",
+      "Green Pepper",
+      "Rosemary",
+      "Spices"
+    ],
+    "price": 430,
+    "image": "/images/shekla-tibs.jpg",
+    "available": true,
+    "featured": true
+  },
+  {
+    "id": 9,
+    "name": "Chechebsa",
+    "category": "Ethiopian",
+    "description": "Traditional Ethiopian shredded flatbread mixed with spiced butter and berbere.",
+    "ingredients": [
+      "Flatbread",
+      "Spiced Butter",
+      "Berbere",
+      "Honey"
+    ],
+    "price": 220,
+    "image": "/images/chechebsa.jpg",
+    "available": true,
+    "featured": false
+  },
+  {
+    "id": 10,
+    "name": "Pizza",
+    "category": "Pizza",
+    "description": "Freshly baked pizza with tomato sauce, cheese and delicious toppings.",
+    "ingredients": [
+      "Pizza Dough",
+      "Tomato Sauce",
+      "Mozzarella",
+      "Toppings"
+    ],
+    "price": 380,
+    "image": "/images/pizza.jpg",
+    "available": true,
+    "featured": true
+  },
+  {
+    "id": 11,
+    "name": "Classic Burger",
     "category": "Burgers",
-    "description": "Juicy beef burger with melted cheese, lettuce, tomato and our special sauce.",
+    "description": "Juicy beef burger served with fresh vegetables, cheese and a soft bun.",
     "ingredients": [
       "Beef Patty",
       "Cheese",
@@ -96,73 +181,38 @@
       "Burger Bun"
     ],
     "price": 300,
-    "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
+    "image": "/images/burger.jpg",
     "available": true,
     "featured": true
   },
   {
-    "id": 7,
-    "name": "Classic Beef Burger",
-    "category": "Burgers",
-    "description": "Classic grilled beef burger served with fresh vegetables and special sauce.",
-    "ingredients": [
-      "Beef Patty",
-      "Lettuce",
-      "Tomato",
-      "Onion",
-      "Burger Bun"
-    ],
-    "price": 280,
-    "image": "https://images.unsplash.com/photo-1550547660-d9450f859349",
-    "available": true,
-    "featured": false
-  },
-  {
-    "id": 8,
-    "name": "Fresh Mango Juice",
+    "id": 12,
+    "name": "Fresh Juice",
     "category": "Drinks",
-    "description": "Freshly prepared mango juice made from ripe mangoes.",
+    "description": "Freshly prepared fruit juice served chilled.",
     "ingredients": [
-      "Fresh Mango",
+      "Fresh Fruit",
       "Water",
       "Ice"
     ],
     "price": 120,
-    "image": "https://images.unsplash.com/photo-1600271886742-f049cd451bba",
+    "image": "/images/juice.jpg",
     "available": true,
     "featured": true
   },
   {
-    "id": 9,
-    "name": "Avocado Juice",
+    "id": 13,
+    "name": "Ethiopian Coffee",
     "category": "Drinks",
-    "description": "Creamy and refreshing avocado juice prepared fresh.",
+    "description": "Freshly roasted and traditionally prepared Ethiopian coffee.",
     "ingredients": [
-      "Avocado",
-      "Milk",
-      "Honey",
-      "Ice"
+      "Coffee Beans",
+      "Water",
+      "Sugar"
     ],
-    "price": 140,
-    "image": "https://images.unsplash.com/photo-1551024709-8f23befc6f87",
+    "price": 100,
+    "image": "/images/coffee.jpg",
     "available": true,
     "featured": false
-  },
-  {
-    "id": 10,
-    "name": "Fresh Mixed Juice",
-    "category": "Drinks",
-    "description": "A refreshing combination of fresh seasonal fruits.",
-    "ingredients": [
-      "Mango",
-      "Avocado",
-      "Papaya",
-      "Orange",
-      "Ice"
-    ],
-    "price": 160,
-    "image": "https://images.unsplash.com/photo-1546173159-315724a31696",
-    "available": true,
-    "featured": true
   }
 ]

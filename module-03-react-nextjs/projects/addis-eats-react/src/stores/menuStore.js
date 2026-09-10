@@ -2,6 +2,10 @@ import { create } from "zustand";
 
 const STORAGE_KEY = "addis-eats-dishes";
 
+function wait(ms = 350) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export const useMenuStore = create((set) => ({
   dishes: [],
   loading: false,
@@ -11,19 +15,22 @@ export const useMenuStore = create((set) => ({
     set({ loading: true, error: null });
 
     try {
-      // 1. Check localStorage first
       const savedDishes = localStorage.getItem(STORAGE_KEY);
 
       if (savedDishes) {
+        const dishes = JSON.parse(savedDishes);
+
+        await wait(350);
+
         set({
-          dishes: JSON.parse(savedDishes),
+          dishes,
           loading: false,
+          error: null,
         });
 
         return;
       }
 
-      // 2. No saved data, so seed from menu-data.json
       const response = await fetch("/menu-data.json");
 
       if (!response.ok) {
@@ -32,13 +39,14 @@ export const useMenuStore = create((set) => ({
 
       const dishes = await response.json();
 
-      // 3. Save the seed data to localStorage
       localStorage.setItem(STORAGE_KEY, JSON.stringify(dishes));
 
-      // 4. Put the data into Zustand
+      await wait(350);
+
       set({
         dishes,
         loading: false,
+        error: null,
       });
     } catch (error) {
       set({
