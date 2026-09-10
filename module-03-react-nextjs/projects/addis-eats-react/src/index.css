@@ -233,3 +233,60 @@ button {
     background-position: -200% 0;
   }
 }
+.search-container {
+  max-width: 600px;
+  margin: 0 auto 30px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  outline: none;
+  font-size: 1rem;
+  background: white;
+}
+
+.search-input:focus {
+  border-color: #e85d04;
+  box-shadow: 0 0 0 3px rgba(232, 93, 4, 0.12);
+}
+.no-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+  font-size: 1.1rem;
+}
+/* =========================
+   Category Filters
+========================= */
+
+.category-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.category-button {
+  border: 1px solid #ddd;
+  background: white;
+  color: #444;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.category-button:hover {
+  border-color: #e85d04;
+  color: #e85d04;
+}
+
+.category-button.active {
+  background: #e85d04;
+  border-color: #e85d04;
+  color: white;
+}

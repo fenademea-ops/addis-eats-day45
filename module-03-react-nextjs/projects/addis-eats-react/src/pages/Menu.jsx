@@ -1,9 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+
 import DishCard from "../components/DishCard";
-import { useMenuStore } from "../stores/menuStore";
 import DishCardSkeleton from "../components/DishCardSkeleton";
+import { useMenuStore } from "../stores/menuStore";
 
 function Menu() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const selectedCategory = searchParams.get("category") || "All";
+
   const dishes = useMenuStore((state) => state.dishes);
   const loading = useMenuStore((state) => state.loading);
   const error = useMenuStore((state) => state.error);
@@ -13,28 +20,61 @@ function Menu() {
     loadDishes();
   }, [loadDishes]);
 
-  if (loading) {
-  return (
-    <main className="menu-page">
-      <div className="menu-container">
-        <h1 className="menu-title">Addis Eats Menu</h1>
+  const categories = [
+    "All",
+    "Ethiopian",
+    "Pizza",
+    "Burgers",
+    "Drinks",
+  ];
 
-        <p className="menu-subtitle">
-          Loading delicious food for you...
-        </p>
+  // First filter by category
+  const categoryFilteredDishes =
+    selectedCategory === "All"
+      ? dishes
+      : dishes.filter((dish) => dish.category === selectedCategory);
 
-        <div className="food-grid">
-          {Array.from({ length: 6 }).map((_, index) => (
-            <DishCardSkeleton key={index} />
-          ))}
-        </div>
-      </div>
-    </main>
+  // Then filter by search
+  const filteredDishes = categoryFilteredDishes.filter((dish) =>
+    dish.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-}
+
+  function handleCategoryChange(category) {
+    if (category === "All") {
+      setSearchParams({});
+    } else {
+      setSearchParams({ category });
+    }
+  }
+
+  if (loading) {
+    return (
+      <main className="menu-page">
+        <div className="menu-container">
+          <h1 className="menu-title">Addis Eats Menu</h1>
+
+          <p className="menu-subtitle">
+            Loading delicious food for you...
+          </p>
+
+          <div className="food-grid">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <DishCardSkeleton key={index} />
+            ))}
+          </div>
+        </div>
+      </main>
+    );
+  }
 
   if (error) {
-    return <h2>{error}</h2>;
+    return (
+      <main className="menu-page">
+        <div className="menu-container">
+          <h2>{error}</h2>
+        </div>
+      </main>
+    );
   }
 
   return (
@@ -46,11 +86,47 @@ function Menu() {
           Delicious food delivered across Addis Ababa
         </p>
 
-        <div className="food-grid">
-          {dishes.map((dish) => (
-            <DishCard key={dish.id} dish={dish} />
+        {/* Search */}
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search dishes..."
+            className="search-input"
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
+        </div>
+
+        {/* Categories */}
+        <div className="category-container">
+          {categories.map((category) => (
+            <button
+              key={category}
+              className={`category-button ${
+                selectedCategory === category ? "active" : ""
+              }`}
+              onClick={() => handleCategoryChange(category)}
+            >
+              {category}
+            </button>
           ))}
         </div>
+
+        {/* Food */}
+        {filteredDishes.length === 0 ? (
+          <p className="no-results">
+            No dishes found
+            {searchTerm && ` for "${searchTerm}"`}
+            {selectedCategory !== "All" &&
+              ` in ${selectedCategory}`}
+          </p>
+        ) : (
+          <div className="food-grid">
+            {filteredDishes.map((dish) => (
+              <DishCard key={dish.id} dish={dish} />
+            ))}
+          </div>
+        )}
       </div>
     </main>
   );
