@@ -1,20 +1,17 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Menu from "./pages/Menu";
 
-function Home() {
-  return (
-    <div>
-      <h1>Welcome to Addis Eats</h1>
-      <p>Delicious food delivered across Addis Ababa.</p>
-    </div>
-  );
-}
+import Layout from "./Layout";
+import Home from "./pages/Home";
+import Menu from "./pages/Menu";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/menu" element={<Menu />} />
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/menu" element={<Menu />} />
+      </Route>
+
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
