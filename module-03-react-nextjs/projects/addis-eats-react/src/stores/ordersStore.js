@@ -29,4 +29,34 @@ export const useOrdersStore = create((set) => ({
       };
     });
   },
+
+  updateOrderStatus(orderId, status) {
+    set((state) => {
+      const nextOrders = state.orders.map((order) =>
+        String(order.id) === String(orderId)
+          ? { ...order, status }
+          : order
+      );
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(nextOrders));
+
+      return {
+        orders: nextOrders,
+      };
+    });
+  },
+
+  deleteOrder(orderId) {
+    set((state) => {
+      const nextOrders = state.orders.filter(
+        (order) => String(order.id) !== String(orderId)
+      );
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(nextOrders));
+
+      return {
+        orders: nextOrders,
+      };
+    });
+  },
 }));

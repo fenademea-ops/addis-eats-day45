@@ -55,4 +55,45 @@ export const useMenuStore = create((set) => ({
       });
     }
   },
+
+  saveDish(dish) {
+    set((state) => {
+      const existingIndex = state.dishes.findIndex((entry) => entry.id === dish.id);
+
+      const nextDishes = existingIndex >= 0
+        ? state.dishes.map((entry) => entry.id === dish.id ? dish : entry)
+        : [...state.dishes, dish];
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(nextDishes));
+
+      return {
+        dishes: nextDishes,
+      };
+    });
+  },
+
+  updateDish(dish) {
+    set((state) => {
+      const nextDishes = state.dishes.map((entry) =>
+        entry.id === dish.id ? dish : entry
+      );
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(nextDishes));
+
+      return {
+        dishes: nextDishes,
+      };
+    });
+  },
+
+  deleteDish(dishId) {
+    set((state) => {
+      const nextDishes = state.dishes.filter((dish) => dish.id !== dishId);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(nextDishes));
+
+      return {
+        dishes: nextDishes,
+      };
+    });
+  },
 }));
