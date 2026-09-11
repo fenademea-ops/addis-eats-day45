@@ -1,11 +1,17 @@
+import { useState } from "react";
+
 import { useMenuStore } from "../stores/menuStore";
 import { useFavoritesStore } from "../stores/favoritesStore";
+import { useCartStore } from "../stores/cartStore";
 
 function Favorites() {
   const dishes = useMenuStore((state) => state.dishes);
   const favoriteIds = useFavoritesStore((state) => state.favorites);
+  const addDish = useCartStore((state) => state.addDish);
 
-  const favoriteDishes = dishes.filter((dish) => favoriteIds.includes(dish.id));
+  const orderedFavoriteDishes = favoriteIds
+    .map((id) => dishes.find((dish) => dish.id === id))
+    .filter(Boolean);
 
   return (
     <main className="page-shell">
@@ -18,7 +24,7 @@ function Favorites() {
           </p>
         </div>
 
-        {favoriteDishes.length === 0 ? (
+        {orderedFavoriteDishes.length === 0 ? (
           <div className="empty-panel">
             <span className="empty-icon">♥</span>
             <h2>No favorites yet</h2>
@@ -26,7 +32,7 @@ function Favorites() {
           </div>
         ) : (
           <div className="favorites-grid">
-            {favoriteDishes.map((dish) => (
+            {orderedFavoriteDishes.map((dish) => (
               <article className="favorite-list-item" key={dish.id}>
                 <div className="favorite-list-image">
                   <img src={dish.image} alt={dish.name} />
@@ -37,6 +43,10 @@ function Favorites() {
                   <h2 className="food-name">{dish.name}</h2>
                   <p className="food-description">{dish.description}</p>
                   <span className="food-price">{dish.price} ETB</span>
+
+                  <button className="favorite-add-button" onClick={() => addDish(dish)}>
+                    Add to Cart
+                  </button>
                 </div>
               </article>
             ))}

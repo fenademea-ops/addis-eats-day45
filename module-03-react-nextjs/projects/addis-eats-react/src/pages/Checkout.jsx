@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCartStore } from "../stores/cartStore";
 import { useMenuStore } from "../stores/menuStore";
@@ -10,11 +11,19 @@ function Checkout() {
   const clearCart = useCartStore((state) => state.clearCart);
   const addOrder = useOrdersStore((state) => state.addOrder);
 
+  const [checkoutForm, setCheckoutForm] = useState({
+    name: "Addis Eats Customer",
+    location: "Addis Ababa",
+    phone: "+251 900 000 000",
+    payment: "Cash on Delivery",
+    specialInstructions: "",
+  });
+
   const cartDishes = cart
     .map((item) => {
       const dish = dishes.find((entry) => entry.id === item.id);
 
-      if (!dish) {
+      if (!dish || !dish.available) {
         return null;
       }
 
@@ -25,6 +34,13 @@ function Checkout() {
     })
     .filter(Boolean);
 
+  const unavailableCartIds = cart
+    .map((item) => item.id)
+    .filter((id) => {
+      const dish = dishes.find((entry) => entry.id === id);
+      return dish && !dish.available;
+    });
+
   const subtotal = cartDishes.reduce(
     (sum, dish) => sum + dish.price * dish.quantity,
     0
@@ -34,7 +50,7 @@ function Checkout() {
   const total = subtotal + delivery;
 
   function handlePlaceOrder() {
-    if (cartDishes.length === 0) {
+    if (cartDishes.length === 0 || unavailableCartIds.length > 0) {
       return;
     }
 
@@ -42,6 +58,12 @@ function Checkout() {
       id: Date.now(),
       createdAt: new Date().toISOString(),
       total,
+      customer: checkoutForm.name,
+      deliveryLocation: checkoutForm.location,
+      deliveryArea: checkoutForm.location,
+      paymentMethod: checkoutForm.payment,
+      phone: checkoutForm.phone,
+      specialInstructions: checkoutForm.specialInstructions,
       dishes: cartDishes.map((dish) => ({
         id: dish.id,
         name: dish.name,
@@ -52,7 +74,7 @@ function Checkout() {
 
     addOrder(order);
     clearCart();
-    navigate("/orders");
+    navigate(`/orders/${order.id}`);
   }
 
   return (
@@ -65,6 +87,13 @@ function Checkout() {
             Complete your Addis Eats order.
           </p>
         </div>
+
+        {unavailableCartIds.length > 0 && (
+          <div className="cart-warning">
+            <span className="cart-warning-icon">!</span>
+            <span>Some dishes in your cart are sold out. Remove them before checkout.</span>
+          </div>
+        )}
 
         {cartDishes.length === 0 ? (
           <div className="empty-panel">
@@ -79,17 +108,65 @@ function Checkout() {
 
               <div className="checkout-field">
                 <label htmlFor="name">Full Name</label>
-                <input id="name" className="checkout-input" defaultValue="Addis Eats Customer" />
+                <input
+                  id="name"
+                  className="checkout-input"
+                  value={checkoutForm.name}
+                  onChange={(event) =>
+                    setCheckoutForm({ ...checkoutForm, name: event.target.value })
+                  }
+                />
               </div>
 
               <div className="checkout-field">
                 <label htmlFor="location">Delivery Location</label>
-                <input id="location" className="checkout-input" defaultValue="Addis Ababa" />
+                <input
+                  id="location"
+                  className="checkout-input"
+                  value={checkoutForm.location}
+                  onChange={(event) =>
+                    setCheckoutForm({ ...checkoutForm, location: event.target.value })
+                  }
+                />
+              </div>
+
+              <div className="checkout-field">
+                <label htmlFor="phone">Phone Number</label>
+                <input
+                  id="phone"
+                  className="checkout-input"
+                  value={checkoutForm.phone}
+                  onChange={(event) =>
+                    setCheckoutForm({ ...checkoutForm, phone: event.target.value })
+                  }
+                />
+              </div>
+
+              <div className="checkout-field">
+                <label htmlFor="specialInstructions">Special Instructions</label>
+                <textarea
+                  id="specialInstructions"
+                  className="checkout-input"
+                  value={checkoutForm.specialInstructions}
+                  onChange={(event) =>
+                    setCheckoutForm({
+                      ...checkoutForm,
+                      specialInstructions: event.target.value,
+                    })
+                  }
+                />
               </div>
 
               <div className="checkout-field">
                 <label htmlFor="payment">Payment Method</label>
-                <select id="payment" className="checkout-input">
+                <select
+                  id="payment"
+                  className="checkout-input"
+                  value={checkoutForm.payment}
+                  onChange={(event) =>
+                    setCheckoutForm({ ...checkoutForm, payment: event.target.value })
+                  }
+                >
                   <option>Cash on Delivery</option>
                   <option>Mobile Money</option>
                   <option>Card</option>

@@ -1,23 +1,27 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
+import DishCard from "../components/DishCard";
+import { useMenuStore } from "../stores/menuStore";
+
 function Home() {
+  const loadDishes = useMenuStore((state) => state.loadDishes);
+  const dishes = useMenuStore((state) => state.dishes);
+
+  useEffect(() => {
+    loadDishes();
+  }, [loadDishes]);
+
+  const featuredDishes = dishes.filter((dish) => dish.featured).slice(0, 4);
+  const homeCards = featuredDishes.length >= 4 ? featuredDishes : dishes.slice(0, 4);
+
   return (
     <main className="home-page">
-      {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content">
-          <p className="hero-label">WELCOME TO ADDIS EATS</p>
+          <p className="hero-label">Addis Eats</p>
 
-          <h1>
-            Delicious food,
-            <br />
-            delivered in Addis Ababa.
-          </h1>
-
-          <p className="hero-description">
-            Discover your favorite Ethiopian and international dishes
-            and have them delivered right to your door.
-          </p>
+          <h1>Fresh food, delivered fast.</h1>
 
           <Link to="/menu" className="hero-button">
             Explore Menu
@@ -25,41 +29,19 @@ function Home() {
         </div>
       </section>
 
-      {/* Categories */}
       <section className="home-section">
         <div className="section-header">
-          <h2>Explore Categories</h2>
+          <h2>Explore Menu</h2>
           <p>Find something delicious to eat.</p>
         </div>
 
-        <div className="category-grid">
-          <Link to="/menu?category=Ethiopian" className="home-category-card">
-            <span>🇪🇹</span>
-            <h3>Ethiopian</h3>
-            <p>Traditional local favorites</p>
-          </Link>
-
-          <Link to="/menu?category=Pizza" className="home-category-card">
-            <span>🍕</span>
-            <h3>Pizza</h3>
-            <p>Fresh and cheesy pizzas</p>
-          </Link>
-
-          <Link to="/menu?category=Burgers" className="home-category-card">
-            <span>🍔</span>
-            <h3>Burgers</h3>
-            <p>Juicy and delicious burgers</p>
-          </Link>
-
-          <Link to="/menu?category=Drinks" className="home-category-card">
-            <span>🥤</span>
-            <h3>Drinks</h3>
-            <p>Fresh and refreshing drinks</p>
-          </Link>
+        <div className="home-menu-card-grid">
+          {homeCards.map((dish) => (
+            <DishCard key={dish.id} dish={dish} />
+          ))}
         </div>
       </section>
 
-      {/* Today's Specials */}
       <section className="home-section">
         <div className="section-header">
           <h2>Today's Specials</h2>

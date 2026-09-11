@@ -18,6 +18,24 @@ function readCart() {
 
 export const useCartStore = create((set) => ({
   cart: readCart(),
+  toast: null,
+
+  syncCartWithMenu(dishes = []) {
+    set((state) => {
+      const nextCart = state.cart.filter((item) => {
+        const dish = dishes.find((entry) => entry.id === item.id);
+        return Boolean(dish && dish.available);
+      });
+
+      if (nextCart.length !== state.cart.length) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(nextCart));
+      }
+
+      return {
+        cart: nextCart,
+      };
+    });
+  },
 
   addDish(dish) {
     set((state) => {
@@ -35,8 +53,20 @@ export const useCartStore = create((set) => ({
 
       return {
         cart: nextCart,
+        toast: {
+          dishName: dish.name,
+          quantity: 1,
+        },
       };
     });
+
+    window.setTimeout(() => {
+      set({ toast: null });
+    }, 900);
+  },
+
+  dismissToast() {
+    set({ toast: null });
   },
 
   removeDish(dishId) {
@@ -73,6 +103,6 @@ export const useCartStore = create((set) => ({
   clearCart() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify([]));
 
-    set({ cart: [] });
+    set({ cart: [], toast: null });
   },
 }));

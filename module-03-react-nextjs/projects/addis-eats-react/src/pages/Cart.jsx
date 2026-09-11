@@ -14,7 +14,7 @@ function Cart() {
     .map((item) => {
       const dish = dishes.find((entry) => entry.id === item.id);
 
-      if (!dish) {
+      if (!dish || !dish.available) {
         return null;
       }
 
@@ -24,6 +24,13 @@ function Cart() {
       };
     })
     .filter(Boolean);
+
+  const unavailableCartIds = cart
+    .map((item) => item.id)
+    .filter((id) => {
+      const dish = dishes.find((entry) => entry.id === id);
+      return dish && !dish.available;
+    });
 
   const subtotal = cartDishes.reduce(
     (sum, dish) => sum + dish.price * dish.quantity,
@@ -48,6 +55,13 @@ function Cart() {
             Review your selected dishes before checkout.
           </p>
         </div>
+
+        {unavailableCartIds.length > 0 && (
+          <div className="cart-warning">
+            <span className="cart-warning-icon">!</span>
+            <span>Some dishes in your cart are sold out and have been removed from checkout.</span>
+          </div>
+        )}
 
         {cartDishes.length === 0 ? (
           <div className="empty-panel">

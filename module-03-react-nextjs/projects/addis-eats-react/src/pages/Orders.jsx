@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { useOrdersStore } from "../stores/ordersStore";
 
 function Orders() {
@@ -44,6 +46,10 @@ function Orders() {
                   <span>Total</span>
                   <span>{order.total} ETB</span>
                 </div>
+
+                <Link className="order-detail-link" to={`/orders/${order.id}`}>
+                  View Details
+                </Link>
               </article>
             ))}
           </div>

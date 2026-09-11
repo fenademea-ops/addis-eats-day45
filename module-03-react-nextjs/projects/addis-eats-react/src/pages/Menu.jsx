@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import DishCard from "../components/DishCard";
 import DishCardSkeleton from "../components/DishCardSkeleton";
 import { useMenuStore } from "../stores/menuStore";
+import { useCartStore } from "../stores/cartStore";
 
 function Menu() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,10 +16,17 @@ function Menu() {
   const loading = useMenuStore((state) => state.loading);
   const error = useMenuStore((state) => state.error);
   const loadDishes = useMenuStore((state) => state.loadDishes);
+  const syncCartWithMenu = useCartStore((state) => state.syncCartWithMenu);
 
   useEffect(() => {
     loadDishes();
   }, [loadDishes]);
+
+  useEffect(() => {
+    if (!loading && dishes.length > 0) {
+      syncCartWithMenu(dishes);
+    }
+  }, [dishes, loading, syncCartWithMenu]);
 
   const categories = [
     "All",

@@ -24,9 +24,17 @@ export const useFavoritesStore = create((set) => ({
       const currentFavorites = state.favorites;
       const isFavorite = currentFavorites.includes(dishId);
 
-      const nextFavorites = isFavorite
-        ? currentFavorites.filter((id) => id !== dishId)
-        : [...currentFavorites, dishId];
+      if (isFavorite) {
+        const nextFavorites = currentFavorites.filter((id) => id !== dishId);
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(nextFavorites));
+
+        return {
+          favorites: nextFavorites,
+        };
+      }
+
+      const nextFavorites = [dishId, ...currentFavorites];
 
       localStorage.setItem(STORAGE_KEY, JSON.stringify(nextFavorites));
 
