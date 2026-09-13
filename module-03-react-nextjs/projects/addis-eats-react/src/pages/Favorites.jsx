@@ -7,6 +7,7 @@ import { useCartStore } from "../stores/cartStore";
 function Favorites() {
   const dishes = useMenuStore((state) => state.dishes);
   const favoriteIds = useFavoritesStore((state) => state.favorites);
+  const clearFavorites = useFavoritesStore((state) => state.clearFavorites);
   const addDish = useCartStore((state) => state.addDish);
 
   const orderedFavoriteDishes = favoriteIds
@@ -17,11 +18,19 @@ function Favorites() {
     <main className="page-shell">
       <section className="page-content">
         <div className="page-heading">
-          <span className="page-kicker">Addis Eats</span>
-          <h1 className="page-title">Favorites</h1>
-          <p className="page-copy">
-            Your saved dishes will appear here.
-          </p>
+          <div>
+            <span className="page-kicker">Addis Eats</span>
+            <h1 className="page-title">Favorites</h1>
+            <p className="page-copy">
+              Your saved dishes will appear here.
+            </p>
+          </div>
+
+          {orderedFavoriteDishes.length > 0 && (
+            <button className="clear-favorites-button" onClick={clearFavorites}>
+              Clear all favorites
+            </button>
+          )}
         </div>
 
         {orderedFavoriteDishes.length === 0 ? (

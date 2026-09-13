@@ -16,7 +16,12 @@ function AdminLayout() {
 
   return (
     <div className="admin-app">
-      <aside className={`admin-sidebar ${sidebarOpen ? "is-open" : "is-closed"}`}>
+      <aside
+        id="admin-sidebar"
+        className={`admin-sidebar ${sidebarOpen ? "is-open" : "is-closed"}`}
+        aria-label="Admin sidebar"
+        aria-expanded={sidebarOpen}
+      >
         <div className="admin-sidebar-top">
           <div className="admin-brand">
             <span className="logo">Addis Eats</span>
@@ -27,6 +32,7 @@ function AdminLayout() {
             className="admin-sidebar-collapse"
             type="button"
             aria-label="Collapse admin sidebar"
+            aria-expanded={sidebarOpen}
             onClick={() => setSidebarOpen(false)}
           >
             <span aria-hidden="true">‹</span>
@@ -61,6 +67,8 @@ function AdminLayout() {
                 className="admin-sidebar-open"
                 type="button"
                 aria-label="Open admin sidebar"
+                aria-controls="admin-sidebar"
+                aria-expanded={sidebarOpen}
                 onClick={() => setSidebarOpen(true)}
               >
                 <span aria-hidden="true">☰</span>

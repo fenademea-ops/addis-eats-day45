@@ -43,4 +43,10 @@ export const useFavoritesStore = create((set) => ({
       };
     });
   },
+
+  clearFavorites() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([]));
+
+    set({ favorites: [] });
+  },
 }));

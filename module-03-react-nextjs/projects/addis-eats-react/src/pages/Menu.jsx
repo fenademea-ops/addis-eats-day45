@@ -88,24 +88,39 @@ function Menu() {
   return (
     <main className="menu-page">
       <div className="menu-container">
-        <h1 className="menu-title">Addis Eats Menu</h1>
+        <section className="menu-hero">
+          <div className="menu-hero-copy">
+            <span className="menu-kicker">Freshly made</span>
+            <h1 className="menu-title">Addis Eats Menu</h1>
+            <p className="menu-subtitle">
+              Delicious food delivered across Addis Ababa.
+            </p>
+          </div>
 
-        <p className="menu-subtitle">
-          Delicious food delivered across Addis Ababa
-        </p>
+          <div className="menu-hero-meta">
+            <div className="menu-stat">
+              <span className="menu-stat-label">Dishes</span>
+              <strong>{dishes.length}</strong>
+            </div>
+            <div className="menu-stat">
+              <span className="menu-stat-label">Popular</span>
+              <strong>Doro Wat</strong>
+            </div>
+          </div>
+        </section>
 
-        {/* Search */}
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Search dishes..."
-            className="search-input"
-            value={searchTerm}
-            onChange={(event) => setSearchTerm(event.target.value)}
-          />
+        <div className="menu-toolbar">
+          <div className="search-container">
+            <input
+              type="text"
+              placeholder="Search dishes..."
+              className="search-input"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+            />
+          </div>
         </div>
 
-        {/* Categories */}
         <div className="category-container">
           {categories.map((category) => (
             <button
@@ -120,14 +135,22 @@ function Menu() {
           ))}
         </div>
 
-        {/* Food */}
+        <div className="menu-results-bar">
+          <span>{filteredDishes.length} items</span>
+          <span>
+            {selectedCategory === "All" ? "All categories" : selectedCategory}
+          </span>
+        </div>
+
         {filteredDishes.length === 0 ? (
-          <p className="no-results">
-            No dishes found
-            {searchTerm && ` for "${searchTerm}"`}
-            {selectedCategory !== "All" &&
-              ` in ${selectedCategory}`}
-          </p>
+          <div className="no-results">
+            <h3>No dishes found</h3>
+            <p>
+              No dishes found
+              {searchTerm && ` for "${searchTerm}"`}
+              {selectedCategory !== "All" && ` in ${selectedCategory}`}
+            </p>
+          </div>
         ) : (
           <div className="food-grid">
             {filteredDishes.map((dish) => (

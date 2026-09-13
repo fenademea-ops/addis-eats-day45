@@ -1,16 +1,47 @@
-# React + Vite
+# Addis Eats React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Addis Eats is a modern food ordering web application designed to showcase a clean, user-friendly restaurant experience using React and Vite. The project focuses on presenting food items attractively while demonstrating core frontend concepts such as component-based UI, client-side routing, and state management.
 
-Currently, two official plugins are available:
+## Project Overview
+This application provides users with an intuitive interface to explore a restaurant menu, view featured dishes, and navigate through the app smoothly. It is structured to demonstrate practical front-end development skills relevant to real-world e-commerce and food-service platforms.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Key Features
+- Responsive restaurant landing page
+- Menu item display with clear product presentation
+- Navigation between sections using React Router
+- State handling for app interactions with Zustand
+- Clean, modern UI styling
 
-## React Compiler
+## Tech Stack
+- React
+- Vite
+- React Router DOM
+- Zustand
+- CSS
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Getting Started
+### Prerequisites
+- Node.js installed on your machine
+- npm or yarn package manager
 
-## Expanding the ESLint configuration
+### Installation
+```bash
+npm install
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Run the App
+```bash
+npm run dev
+```
+
+Then open the local URL shown in the terminal to view the application.
+
+## Production Build
+```bash
+npm run build
+```
+
+This generates an optimized production build for deployment.
+
+## Project Purpose
+The goal of this project is to strengthen frontend development skills by building a polished, responsive web app that reflects a realistic food ordering experience.

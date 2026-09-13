@@ -12,8 +12,9 @@ function Home() {
     loadDishes();
   }, [loadDishes]);
 
-  const featuredDishes = dishes.filter((dish) => dish.featured).slice(0, 4);
-  const homeCards = featuredDishes.length >= 4 ? featuredDishes : dishes.slice(0, 4);
+  const featuredDishes = dishes.filter((dish) => dish.featured);
+  const homeCards = featuredDishes.length >= 3 ? featuredDishes.slice(0, 3) : dishes.slice(0, 3);
+  const specialDish = featuredDishes[0] || dishes[0];
 
   return (
     <main className="home-page">
@@ -48,15 +49,18 @@ function Home() {
           <p>Some of our popular choices.</p>
         </div>
 
-        <div className="specials-placeholder">
-          <p>
-            Our special dishes will appear here.
-          </p>
-
-          <Link to="/menu" className="hero-button">
-            View Full Menu
-          </Link>
-        </div>
+        {specialDish ? (
+          <div className="specials-grid">
+            <DishCard dish={specialDish} />
+          </div>
+        ) : (
+          <div className="specials-placeholder">
+            <p>Our special dishes will appear here.</p>
+            <Link to="/menu" className="hero-button">
+              View Full Menu
+            </Link>
+          </div>
+        )}
       </section>
     </main>
   );
