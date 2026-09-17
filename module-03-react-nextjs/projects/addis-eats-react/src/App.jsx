@@ -9,6 +9,8 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import DishDetail from "./pages/DishDetail";
 import OrderDetail from "./pages/OrderDetail";
+import RequireAuth from "./auth/RequireAuth";
+import SignIn from "./auth/SignIn";
 
 import AdminLayout from "./components/AdminLayout";
 import RequireAdmin from "./components/RequireAdmin";
@@ -24,12 +26,14 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/menu/:dishId" element={<DishDetail />} />
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/orders/:orderId" element={<OrderDetail />} />
+        <Route path="/favorites" element={<RequireAuth><Favorites /></RequireAuth>} />
+        <Route path="/orders" element={<RequireAuth><Orders /></RequireAuth>} />
+        <Route path="/orders/:orderId" element={<RequireAuth><OrderDetail /></RequireAuth>} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/checkout" element={<RequireAuth><Checkout /></RequireAuth>} />
       </Route>
+
+      <Route path="/sign-in" element={<SignIn />} />
 
       <Route path="/admin/login" element={<AdminLogin />} />
 

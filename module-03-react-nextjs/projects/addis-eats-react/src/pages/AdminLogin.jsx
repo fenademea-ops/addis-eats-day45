@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 
-const SESSION_KEY = "addis-eats-admin-session";
+import useAdminAuth from "../admin/useAdminAuth.js";
 
 function AdminLogin() {
   const navigate = useNavigate();
@@ -9,8 +9,9 @@ function AdminLogin() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const { isAuthenticated, login } = useAdminAuth();
 
-  if (sessionStorage.getItem(SESSION_KEY)) {
+  if (isAuthenticated) {
     return <Navigate to="/admin" replace />;
   }
 
@@ -27,7 +28,7 @@ function AdminLogin() {
 
     window.setTimeout(() => {
       if (username.trim().toLowerCase() === "admin" && password === "admin123") {
-        sessionStorage.setItem(SESSION_KEY, JSON.stringify({ username }));
+        login(username.trim());
         navigate("/admin", { replace: true });
       } else {
         setError("Invalid username or password.");

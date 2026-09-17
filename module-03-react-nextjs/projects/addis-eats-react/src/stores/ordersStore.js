@@ -11,7 +11,7 @@ function readOrders() {
     }
 
     return JSON.parse(savedOrders);
-  } catch (error) {
+  } catch {
     return [];
   }
 }

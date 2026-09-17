@@ -11,7 +11,7 @@ function readCart() {
     }
 
     return JSON.parse(savedCart);
-  } catch (error) {
+  } catch {
     return [];
   }
 }
@@ -83,9 +83,9 @@ export const useCartStore = create((set) => ({
   updateQuantity(dishId, quantity) {
     set((state) => {
       if (quantity <= 0) {
-        return {
-          cart: state.cart.filter((item) => item.id !== dishId),
-        };
+        const nextCart = state.cart.filter((item) => item.id !== dishId);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(nextCart));
+        return { cart: nextCart };
       }
 
       const nextCart = state.cart.map((item) =>

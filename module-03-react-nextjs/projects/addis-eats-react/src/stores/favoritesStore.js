@@ -11,7 +11,7 @@ function readFavorites() {
     }
 
     return JSON.parse(savedFavorites);
-  } catch (error) {
+  } catch {
     return [];
   }
 }

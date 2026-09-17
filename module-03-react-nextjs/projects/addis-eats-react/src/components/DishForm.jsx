@@ -16,7 +16,7 @@ function DishForm({ dish, onSubmit, onCancel }) {
           : dish.ingredients || "",
       }
     : {
-        id: Date.now(),
+      id: null,
         name: "",
         category: "",
         description: "",

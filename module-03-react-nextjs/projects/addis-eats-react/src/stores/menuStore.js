@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { fetchDishes } from "../api/dishes.js";
 
 const STORAGE_KEY = "addis-eats-dishes";
 
@@ -31,13 +32,7 @@ export const useMenuStore = create((set) => ({
         return;
       }
 
-      const response = await fetch("/menu-data.json");
-
-      if (!response.ok) {
-        throw new Error("Failed to load menu data");
-      }
-
-      const dishes = await response.json();
+      const dishes = await fetchDishes();
 
       localStorage.setItem(STORAGE_KEY, JSON.stringify(dishes));
 
@@ -48,7 +43,7 @@ export const useMenuStore = create((set) => ({
         loading: false,
         error: null,
       });
-    } catch (error) {
+    } catch {
       set({
         error: "Failed to load menu.",
         loading: false,

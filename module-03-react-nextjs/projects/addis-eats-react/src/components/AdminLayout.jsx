@@ -3,14 +3,15 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 import Footer from "./Footer";
 import ThemeToggle from "../theme/ThemeToggle";
-import { SESSION_KEY } from "./RequireAdmin";
+import useAdminAuth from "../admin/useAdminAuth.js";
 
 function AdminLayout() {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const { logout } = useAdminAuth();
 
   function handleLogout() {
-    sessionStorage.removeItem(SESSION_KEY);
+    logout();
     navigate("/admin/login", { replace: true });
   }
 

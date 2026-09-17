@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useCartStore } from "../stores/cartStore";
 import { useMenuStore } from "../stores/menuStore";
 import { useOrdersStore } from "../stores/ordersStore";
+import DeliveryEstimate from "../checkout/DeliveryEstimate.jsx";
+import validateCheckout from "../checkout/validate.js";
 
 function Checkout() {
   const navigate = useNavigate();
@@ -18,6 +20,7 @@ function Checkout() {
     payment: "Cash on Delivery",
     specialInstructions: "",
   });
+  const [formErrors, setFormErrors] = useState({});
 
   const cartDishes = cart
     .map((item) => {
@@ -50,13 +53,21 @@ function Checkout() {
   const total = subtotal + delivery;
 
   function handlePlaceOrder() {
+    const validationErrors = validateCheckout(checkoutForm);
+    setFormErrors(validationErrors);
+
     if (cartDishes.length === 0 || unavailableCartIds.length > 0) {
       return;
     }
 
+    if (Object.keys(validationErrors).length > 0) {
+      return;
+    }
+
+    const now = new Date();
     const order = {
-      id: Date.now(),
-      createdAt: new Date().toISOString(),
+      id: now.getTime(),
+      createdAt: now.toISOString(),
       total,
       customer: checkoutForm.name,
       deliveryLocation: checkoutForm.location,
@@ -116,6 +127,7 @@ function Checkout() {
                     setCheckoutForm({ ...checkoutForm, name: event.target.value })
                   }
                 />
+                {formErrors.name && <span className="form-error">{formErrors.name}</span>}
               </div>
 
               <div className="checkout-field">
@@ -128,6 +140,7 @@ function Checkout() {
                     setCheckoutForm({ ...checkoutForm, location: event.target.value })
                   }
                 />
+                {formErrors.location && <span className="form-error">{formErrors.location}</span>}
               </div>
 
               <div className="checkout-field">
@@ -140,6 +153,7 @@ function Checkout() {
                     setCheckoutForm({ ...checkoutForm, phone: event.target.value })
                   }
                 />
+                {formErrors.phone && <span className="form-error">{formErrors.phone}</span>}
               </div>
 
               <div className="checkout-field">
@@ -176,6 +190,7 @@ function Checkout() {
 
             <aside className="checkout-summary">
               <h2>Order Summary</h2>
+              <DeliveryEstimate area={checkoutForm.location} />
 
               <div className="checkout-items">
                 {cartDishes.map((dish) => (

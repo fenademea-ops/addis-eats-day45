@@ -1,0 +1,1 @@
+export { useFavoritesStore as default, useFavoritesStore } from "../stores/favoritesStore.js";
