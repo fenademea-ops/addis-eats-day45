@@ -2671,3 +2671,303 @@ button {
     font-size: 1rem;
   }
 }
+
+/* =========================
+   RESPONSIVE LAYOUT FIXES
+========================= */
+
+@media (max-width: 900px) {
+  .dish-detail-card,
+  .cart-layout,
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-summary-grid,
+  .admin-dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-sidebar {
+    width: 220px;
+    min-width: 220px;
+  }
+
+  .admin-content {
+    padding: 22px;
+  }
+}
+
+@media (max-width: 700px) {
+  .header-container {
+    align-items: stretch;
+  }
+
+  .logo {
+    text-align: center;
+  }
+
+  .theme-toggle {
+    align-self: center;
+  }
+
+  .hero-section {
+    min-height: 460px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(2.35rem, 12vw, 4rem);
+  }
+
+  .menu-hero,
+  .page-heading,
+  .admin-page-title,
+  .admin-chart-header,
+  .admin-chart-total-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .menu-hero {
+    padding: 22px;
+  }
+
+  .menu-hero-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .menu-stat {
+    min-width: 0;
+  }
+
+  .menu-results-bar,
+  .cart-title-row,
+  .order-card-head,
+  .admin-list-row,
+  .admin-order-item,
+  .admin-order-total {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .favorite-list-item,
+  .cart-item {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .favorite-list-image,
+  .cart-image {
+    width: 100%;
+    height: 180px;
+  }
+
+  .food-bottom,
+  .food-card-actions,
+  .dish-form-actions,
+  .admin-modal-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .food-card-actions > *,
+  .food-bottom > *,
+  .dish-form-actions > *,
+  .admin-modal-actions > * {
+    width: 100%;
+  }
+
+  .admin-app {
+    display: block;
+  }
+
+  .admin-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 1100;
+    width: min(280px, 86vw);
+    min-width: 0;
+    box-shadow: 10px 0 30px var(--shadow);
+  }
+
+  .admin-sidebar.is-closed {
+    width: 0;
+  }
+
+  .admin-header {
+    min-height: 64px;
+    padding: 0 16px;
+  }
+
+  .admin-header-actions {
+    gap: 6px;
+  }
+
+  .admin-header-logout {
+    padding: 8px 10px;
+  }
+
+  .admin-content {
+    padding: 16px;
+  }
+
+  .admin-summary-grid,
+  .admin-dashboard-grid,
+  .dish-form-grid,
+  .admin-order-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-panel,
+  .admin-chart-panel,
+  .admin-auth-card,
+  .checkout-form,
+  .checkout-summary,
+  .cart-summary,
+  .order-detail-card {
+    padding: 18px;
+  }
+
+  .admin-orders-toolbar,
+  .admin-order-search,
+  .admin-order-status {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .admin-search-input {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .admin-chart-area {
+    padding-inline: 4px;
+  }
+
+  .admin-chart-bars {
+    gap: 4px;
+    padding-inline: 2px;
+  }
+
+  .admin-chart-bar {
+    width: clamp(18px, 7vw, 34px);
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-toast {
+    top: 12px;
+    right: 12px;
+    left: 12px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-content,
+  .home-section,
+  .footer-container {
+    width: min(100% - 24px, 1200px);
+  }
+
+  .home-section {
+    padding: 40px 0;
+  }
+
+  .section-header h2 {
+    font-size: 1.65rem;
+  }
+
+  .menu-page,
+  .dish-detail-page {
+    padding-inline: 12px;
+  }
+
+  .menu-hero-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-stat {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .category-button {
+    flex: 1 1 calc(50% - 10px);
+    min-width: 0;
+    padding-inline: 10px;
+  }
+
+  .food-content {
+    padding: 16px;
+  }
+
+  .admin-chart-range {
+    width: 100%;
+  }
+
+  .admin-chart-range-button {
+    flex: 1;
+    padding-inline: 8px;
+  }
+}
+
+/* =========================
+   HOME PAGE MOBILE TUNING
+========================= */
+
+@media (max-width: 900px) {
+  .hero-section {
+    min-height: 500px;
+    padding: 56px 0;
+    background-position: 60% center;
+  }
+
+  .home-menu-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .hero-section {
+    min-height: 460px;
+    padding: 48px 0;
+    background-position: 64% center;
+  }
+
+  .home-menu-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-menu-card-grid .food-card {
+    min-height: 0;
+  }
+
+  .home-menu-card-grid .food-image-wrap,
+  .home-menu-card-grid .food-image {
+    height: clamp(180px, 52vw, 230px);
+  }
+
+  .specials-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    min-height: 420px;
+    background-position: 68% center;
+  }
+
+  .hero-content h1 {
+    max-width: 12ch;
+    margin-bottom: 18px;
+  }
+
+  .hero-button {
+    width: 100%;
+    text-align: center;
+  }
+}
