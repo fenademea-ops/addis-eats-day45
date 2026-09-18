@@ -2,10 +2,21 @@ import { useState } from "react";
 
 import { AuthContext, AUTH_STORAGE_KEY } from "./authContext.js";
 
+const CUSTOMER_USERNAME = "customer";
+const CUSTOMER_PASSWORD = "customer123";
+
 function readUser() {
   try {
-    return JSON.parse(localStorage.getItem(AUTH_STORAGE_KEY)) || null;
+    const savedUser = JSON.parse(localStorage.getItem(AUTH_STORAGE_KEY));
+
+    if (savedUser?.username?.toLowerCase() === CUSTOMER_USERNAME) {
+      return savedUser;
+    }
+
+    localStorage.removeItem(AUTH_STORAGE_KEY);
+    return null;
   } catch {
+    localStorage.removeItem(AUTH_STORAGE_KEY);
     return null;
   }
 }
@@ -13,10 +24,17 @@ function readUser() {
 function AuthProvider({ children }) {
   const [user, setUser] = useState(readUser);
 
-  function signIn(name) {
-    const nextUser = { name: name.trim() };
+  function signIn(username, password) {
+    const trimmedUsername = username.trim();
+
+    if (trimmedUsername.toLowerCase() !== CUSTOMER_USERNAME || password !== CUSTOMER_PASSWORD) {
+      return false;
+    }
+
+    const nextUser = { username: trimmedUsername };
     localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(nextUser));
     setUser(nextUser);
+    return true;
   }
 
   function signOut() {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import useAdminAuth from "../admin/useAdminAuth.js";
 
@@ -77,6 +77,10 @@ function AdminLogin() {
             {loading ? "Signing in..." : "Login"}
           </button>
         </form>
+
+        <Link className="auth-home-link" to="/">
+          Back to Home
+        </Link>
       </section>
     </main>
   );

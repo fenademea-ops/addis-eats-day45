@@ -26,8 +26,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/menu/:dishId" element={<DishDetail />} />
-        <Route path="/favorites" element={<RequireAuth><Favorites /></RequireAuth>} />
-        <Route path="/orders" element={<RequireAuth><Orders /></RequireAuth>} />
+        <Route path="/favorites" element={<RequireAuth requireFreshLogin><Favorites /></RequireAuth>} />
+        <Route path="/orders" element={<RequireAuth requireFreshLogin><Orders /></RequireAuth>} />
         <Route path="/orders/:orderId" element={<RequireAuth><OrderDetail /></RequireAuth>} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<RequireAuth><Checkout /></RequireAuth>} />

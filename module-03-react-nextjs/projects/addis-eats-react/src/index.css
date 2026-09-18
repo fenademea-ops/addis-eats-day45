@@ -2337,6 +2337,22 @@ button {
   margin-top: 24px;
 }
 
+.auth-home-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--primary);
+  font-weight: 800;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.auth-home-link:hover,
+.auth-home-link:focus-visible {
+  color: var(--primary-dark);
+  text-decoration: underline;
+  transform: translateY(-1px);
+}
+
 .admin-form-field {
   display: flex;
   flex-direction: column;
