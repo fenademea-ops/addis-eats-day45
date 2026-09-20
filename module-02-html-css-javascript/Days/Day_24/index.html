@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Addis Eats | Fresh Food Delivery</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-container">
+      <h1 class="brand-title">Addis<span>Eats</span></h1>
+      <div class="search-box">
+        <label for="searchInput" class="sr-only">Search menu items</label>
+        <input type="search" id="searchInput" placeholder="Search menu..." />
+      </div>
+      <button id="cartToggleBtn" class="cart-trigger" aria-label="View shopping cart">
+        Cart (<span id="cartCount">0</span>)
+      </button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <section class="filters-section" aria-label="Menu Filters">
+      <nav id="categoryFilters" class="category-pills">
+        <button class="pill active" data-category="all">All</button>
+        <button class="pill" data-category="traditional">Traditional</button>
+        <button class="pill" data-category="fast-food">Fast Food</button>
+        <button class="pill" data-category="drinks">Drinks</button>
+      </nav>
+    </section>
+
+    <section id="menuContainer" class="menu-grid" aria-live="polite">
+      <!-- Menu cards populated via renderMenu() -->
+    </section>
+  </main>
+
+  <!-- Cart & Checkout Slide-Over Drawer -->
+  <aside id="cartDrawer" class="cart-drawer" aria-hidden="true" role="dialog" aria-labelledby="cartHeading">
+    <div class="cart-header">
+      <h2 id="cartHeading">Your Order</h2>
+      <button id="cartCloseBtn" class="btn-close" aria-label="Close cart">&times;</button>
+    </div>
+
+    <!-- Active Cart View -->
+    <div id="cartView" class="cart-view-container">
+      <div id="cartItemList" class="cart-items" tabindex="0">
+        <!-- Cart line items rendered dynamically -->
+      </div>
+      
+      <div class="cart-summary">
+        <div class="cart-total-row">
+          <span>Subtotal:</span>
+          <strong id="cartTotal">ETB 0</strong>
+        </div>
+      </div>
+
+      <!-- Validated Checkout Form -->
+      <form id="checkoutForm" class="checkout-form" novalidate>
+        <h3 class="checkout-heading">Delivery Details</h3>
+        
+        <div id="checkoutAlert" class="form-alert" role="alert" hidden></div>
+
+        <div class="form-group">
+          <label for="customerName">Full Name</label>
+          <input 
+            type="text" 
+            id="customerName" 
+            name="customerName" 
+            placeholder="e.g. Abebe Bikila" 
+            autocomplete="name" 
+            aria-describedby="nameError" 
+          />
+          <span id="nameError" class="field-error" aria-live="polite"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="customerPhone">Phone Number</label>
+          <input 
+            type="tel" 
+            id="customerPhone" 
+            name="customerPhone" 
+            placeholder="0911... or +251..." 
+            autocomplete="tel" 
+            aria-describedby="phoneError" 
+          />
+          <span id="phoneError" class="field-error" aria-live="polite"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="deliveryAddress">Delivery Address / Landmark</label>
+          <input 
+            type="text" 
+            id="deliveryAddress" 
+            name="deliveryAddress" 
+            placeholder="Bole, near Edna Mall" 
+            autocomplete="street-address"
+            aria-describedby="addressError"
+          />
+          <span id="addressError" class="field-error" aria-live="polite"></span>
+        </div>
+
+        <button type="submit" id="submitOrderBtn" class="btn-checkout">Confirm & Place Order</button>
+      </form>
+    </div>
+
+    <!-- Order Confirmation Screen -->
+    <div id="confirmationView" class="confirmation-view" hidden>
+      <div class="success-icon" aria-hidden="true">&#10003;</div>
+      <h3>Order Confirmed!</h3>
+      <p id="confirmationMessage" class="confirmation-message"></p>
+      <div class="order-receipt" id="orderReceipt"></div>
+      <button id="dismissConfirmationBtn" class="btn-secondary">Order More Food</button>
+    </div>
+  </aside>
+
+  <div id="cartBackdrop" class="cart-backdrop"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
