@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Addis Eats | Fresh Food Delivery</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-container">
+      <h1 class="brand-title">Addis<span>Eats</span></h1>
+      <div class="search-box">
+        <input type="search" id="searchInput" placeholder="Search menu..." aria-label="Search food items" />
+      </div>
+      <button id="cartToggleBtn" class="cart-trigger" aria-label="Open cart">
+        Cart (<span id="cartCount">0</span>)
+      </button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <section class="filters-section">
+      <nav id="categoryFilters" class="category-pills" aria-label="Filter by category">
+        <button class="pill active" data-category="all">All</button>
+        <button class="pill" data-category="traditional">Traditional</button>
+        <button class="pill" data-category="fast-food">Fast Food</button>
+        <button class="pill" data-category="drinks">Drinks</button>
+      </nav>
+    </section>
+
+    <section id="menuContainer" class="menu-grid" aria-live="polite">
+      <!-- Menu cards dynamically render here -->
+    </section>
+  </main>
+
+  <!-- Cart Slide-over Panel -->
+  <aside id="cartDrawer" class="cart-drawer" aria-hidden="true">
+    <div class="cart-header">
+      <h2>Your Order</h2>
+      <button id="cartCloseBtn" class="btn-close" aria-label="Close cart">&times;</button>
+    </div>
+    <div id="cartItemList" class="cart-items">
+      <!-- Cart rows render here -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Total:</span>
+        <strong id="cartTotal">ETB 0</strong>
+      </div>
+      <button id="checkoutBtn" class="btn-checkout">Checkout</button>
+    </div>
+  </aside>
+  <div id="cartBackdrop" class="cart-backdrop"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
