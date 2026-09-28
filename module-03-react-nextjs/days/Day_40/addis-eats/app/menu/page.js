@@ -1,10 +1,12 @@
+import { CategoryBar } from "@/components/CategoryBar";
 import { FilterShell } from "@/components/FilterShell";
-import { getDishes } from "@/lib/dishes";
+import { getDishes, getMenuCategories } from "@/lib/dishes";
 
 export const revalidate = 3600;
 
 export default async function MenuPage() {
   const dishes = await getDishes();
+  const categories = getMenuCategories();
 
   return (
     <div className="space-y-6">
@@ -16,7 +18,10 @@ export default async function MenuPage() {
         <span className="rounded-full bg-orange-100 px-3 py-1 text-sm font-semibold text-orange-700">Freshly prepared</span>
       </div>
 
-      <FilterShell dishes={dishes} />
+      <div className="space-y-4">
+        <CategoryBar categories={categories} />
+        <FilterShell dishes={dishes} />
+      </div>
     </div>
   );
 }

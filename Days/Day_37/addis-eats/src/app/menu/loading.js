@@ -1,0 +1,1 @@
+export default function Loading() { return <div className="menu-loading"><div className="loading-bar" /><p>Preparing the menu...</p></div>; }

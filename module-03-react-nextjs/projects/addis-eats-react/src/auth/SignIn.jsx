@@ -67,8 +67,7 @@ function SignIn() {
 
           {error && <div className="admin-error">{error}</div>}
 
-          <div className="admin-helper-text">Demo login: username = customer, password = customer123</div>
-
+          
           <button className="checkout-button" type="submit" disabled={loading}>
             {loading ? "Signing in..." : "Login"}
           </button>

@@ -8,7 +8,7 @@ export function CategoryBar({ categories }) {
   const activeCategory = searchParams.get("category") || "All";
 
   return (
-    <nav aria-label="Dish categories" className="flex flex-col gap-2">
+    <nav aria-label="Dish categories" className="flex w-full items-center gap-2 overflow-x-auto rounded-xl border border-slate-300 bg-white p-2 shadow-sm scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-300">
       {categories.map((category) => {
         const isActive = activeCategory === category;
         const href = category === "All" ? "/menu" : `/menu?category=${encodeURIComponent(category)}`;
@@ -18,8 +18,10 @@ export function CategoryBar({ categories }) {
             key={category}
             href={href}
             className={[
-              "rounded-xl px-3 py-2 text-left text-sm font-medium transition",
-              isActive ? "bg-orange-600 text-white shadow-sm" : "bg-slate-100 text-slate-700 hover:bg-slate-200",
+              "shrink-0 rounded-full border px-3 py-2 text-sm font-medium transition-colors duration-150",
+              isActive
+                ? "border-orange-500 bg-orange-600 text-white shadow-sm"
+                : "border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-slate-100",
             ].join(" ")}
             aria-current={isActive ? "page" : undefined}
           >
