@@ -8,6 +8,18 @@ export function AddToCartButton({ dish }) {
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
 
+  if (dish.available === false) {
+    return (
+      <button
+        type="button"
+        disabled
+        className="cursor-not-allowed rounded-full border border-slate-200 bg-slate-100 px-5 py-2.5 text-sm font-semibold text-slate-500"
+      >
+        Sold Out
+      </button>
+    );
+  }
+
   return (
     <>
     <button

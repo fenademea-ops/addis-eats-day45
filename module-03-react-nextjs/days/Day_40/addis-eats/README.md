@@ -1,81 +1,97 @@
 # Addis Eats
 
-Addis Eats is a small Ethiopian food-ordering demo built with the Next.js App Router. Browse dishes, add them to a browser-side cart, and submit an order that is validated and processed on the server.
+## Features
+
+- Customer ordering flow for Ethiopian and international dishes
+- Browser-side cart with quantity controls and totals
+- Dynamic checkout with validation and server-side order creation
+- Admin dashboard for dishes and orders
+- Dish management and order status updates with server-side checks
+- Demo admin authorization and ownership enforcement
 
 ## Technologies
 
-- Next.js 16 App Router
-- React 19
+- Next.js
+- React
 - JavaScript
 - Tailwind CSS
 - Zod
-- ESLint
 
-## Installation
+## Customer Routes
 
-```bash
-npm install
-```
+- `/`
+- `/menu`
+- `/menu/[id]`
+- `/cart`
+- `/checkout`
 
-## Development
+## Admin Routes
 
-```bash
-npm run dev
-```
+- `/admin/login`
+- `/admin`
+- `/admin/dishes`
+- `/admin/orders`
 
-## Production build
+### Admin Login
 
-```bash
-npm run build
-```
+The customer navbar's Admin link opens `/admin/login`. The login Server Action validates credentials on the server and sets an expiring, HMAC-signed, HTTP-only cookie, marked Secure for HTTPS requests. `/admin`, `/admin/dishes`, `/admin/orders`, and admin mutations verify that session server-side. Logout clears the cookie and returns to the login page.
 
-## Production start
+Demo credentials:
 
-```bash
-npm run start
-```
+- Email: `admin@addiseats.com`
+- Password: `Admin123!`
 
-## Routes
+These credentials and the cookie session are for educational/demo purposes only. They are not production authentication. The local demo uses a stable development signing key so sessions work across Next.js server workers. For a deployed app, configure `ADMIN_LOGIN_EMAIL`, `ADMIN_LOGIN_PASSWORD`, and a stable random `ADMIN_SESSION_SECRET` on the server. The session expires after 12 hours by default or 30 days when Remember me is selected.
 
-| Route | Purpose |
-| --- | --- |
-| `/` | Static home page and today's featured dishes |
-| `/menu` | Server-rendered menu with hourly ISR and category selection |
-| `/menu/[id]` | Dish details, generated at build time for known IDs |
-| `/cart` | Browser-side cart controls and totals |
-| `/checkout` | Dynamic checkout form and order summary |
-| `/api/dishes` | GET all dishes as JSON |
-| `/api/dishes/[id]` | GET one dish, or 404 when it is missing |
-| `/api/orders` | POST a validated order |
+## API Routes
+
+- `/api/dishes`
+- `/api/dishes/[id]`
+- `/api/orders`
 
 ## Rendering Strategies
 
-The home page is static because its content does not depend on a request. The menu exports `revalidate = 3600`, so Next.js can reuse its server-rendered page and refresh it hourly. Dish pages use `generateStaticParams()` for the IDs in the local catalog. The cart is interactive browser state persisted in local storage. Checkout exports `dynamic = "force-dynamic"` because order submission is request-specific. API Route Handlers process each request.
+- Static: Home page and other pages without request-specific data.
+- ISR: `/menu` uses `revalidate = 3600` to refresh hourly.
+- Dynamic: `/checkout` and admin pages render request-by-request.
+- Client: cart state and browser-only interaction remain client-side.
 
-## Server and Client Components
+## Server Components
 
-Layouts, pages, dish data access, `DishList`, and `DishCard` stay on the server. Client Components are limited to the cart provider and controls, category selection, checkout form state, cancellation state, and the required menu error boundary. The root layout remains a Server Component and passes its page content through the cart provider as children.
+The server keeps the root layout, home page, menu pages, dish details, admin dashboard summary, admin tables, and route handlers on the server. This keeps data access in a single place and makes the page structure easier to explain and maintain.
 
-## API
+## Client Components
 
-`GET /api/dishes` returns `{ "dishes": [...] }`. `GET /api/dishes/[id]` returns one dish or `{ "error": "Dish not found" }` with status 404. `POST /api/orders` accepts customer fields and `items` containing dish IDs and quantities. Invalid data returns status 422 with `fieldErrors`; malformed JSON returns status 400. Prices and names are looked up from the server-side menu rather than trusted from the request.
+Client components are limited to browser-only features such as the cart provider, cart controls, add-to-cart button, checkout form, admin login form (password visibility and pending/error feedback), interactive admin shell/sidebar, admin add/edit form, and the required error boundary. Credentials are not placed in client JavaScript.
 
 ## Server Actions
 
-`placeOrder` validates checkout data, creates the order, returns field or success state, and revalidates checkout. `cancelOrder` reads the current session cookie on the server, finds the requested order, and removes it only when its stored owner matches that session. The order reference is user-submitted, but ownership is never accepted from the browser.
+The project uses server actions for:
 
-## Validation and Security
+- `placeOrder`
+- `cancelOrder`
+- `addDish`
+- `updateDish`
+- `deleteDish`
+- `updateOrderStatus`
+- `loginAdmin`
+- `logoutAdmin`
 
-`lib/schema.js` is shared by the Route Handler and Server Action. It checks customer name, Ethiopian phone number, delivery location, payment method, and item IDs/quantities. The server also checks that each dish still exists and derives its price from the menu data.
+These actions validate the request on the server and revalidate the affected pages after successful mutation.
 
-For this assignment, the server issues an HttpOnly, SameSite cookie with a random demo session ID. Orders store that ID as their owner, and cancellation compares it server-side. This demonstrates ownership checks but is not a production authentication system. Orders are stored in process memory and disappear when the server restarts; multiple server instances do not share that memory. A real deployment needs authenticated sessions and a persistent database.
+## Validation
 
-The Server Action can handle a form submission before its client JavaScript hydrates. Restoring a cart from local storage itself requires browser JavaScript, so a no-JavaScript checkout submission has no cart items and is rejected by server validation.
+`lib/schema.js` holds the shared Zod validation for orders, dish input, order status, and admin login fields. The same schema is used by server actions and API handlers so the validation rules stay consistent across the app.
 
-## Testing
+## Authorization
+
+Admin access is protected by a signed session cookie named `addis-eats-admin-role`. The cookie is HTTP-only, same-site, Secure on HTTPS, expires after 12 hours by default (30 days with Remember me), and is checked by server components and every protected admin mutation. Logout clears it. Client-side flags do not grant authorization. This demo uses public coursework credentials and a stable local signing key; it is not production authentication. Configure a private `ADMIN_SESSION_SECRET` and real identity provider for production.
+
+## Production Verification
 
 ```bash
-npm run lint
 npm run build
 npm run start
 ```
+
+This project has been checked in production mode to confirm the app builds successfully and the server starts without errors.

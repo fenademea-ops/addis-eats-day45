@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const STORAGE_KEY = "addis-eats-favorites";
-const AUTH_KEY = "addis-eats-auth";
 
 function readFavoritesCount() {
   if (typeof window === "undefined") {
@@ -60,6 +59,9 @@ export function SiteHeader() {
           </Link>
           <Link href="/checkout" className="transition hover:text-orange-600">
             Checkout
+          </Link>
+          <Link href="/admin/login" className="transition hover:text-orange-600">
+            Admin
           </Link>
         </nav>
       </div>

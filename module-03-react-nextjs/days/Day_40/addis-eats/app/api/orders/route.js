@@ -38,6 +38,13 @@ export async function POST(request) {
       );
     }
 
+    if (dish.available === false) {
+      return NextResponse.json(
+        { error: "Validation failed", fieldErrors: { items: [`${dish.name} is currently sold out.`] } },
+        { status: 422 },
+      );
+    }
+
     items.push({
       id: dish.id,
       name: dish.name,

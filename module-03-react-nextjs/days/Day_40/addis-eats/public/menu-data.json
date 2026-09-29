@@ -4,71 +4,122 @@
     "name": "Kitfo",
     "category": "Ethiopian",
     "description": "Minced beef seasoned with mitmita and Ethiopian spiced butter, served with a rich traditional finish.",
-    "ingredients": ["Beef", "Mitmita", "Spiced butter", "Ayib"],
+    "ingredients": [
+      "Beef",
+      "Mitmita",
+      "Spiced butter",
+      "Ayib"
+    ],
     "price": 450,
-    "image": "/images/kitfo.jpg"
+    "image": "/images/kitfo.jpg",
+    "available": true
   },
   {
     "id": "doro-wat",
     "name": "Doro Wat",
     "category": "Ethiopian",
     "description": "A classic chicken stew cooked with berbere, onions, garlic and warm Ethiopian spices.",
-    "ingredients": ["Chicken", "Berbere", "Onion", "Garlic", "Egg"],
+    "ingredients": [
+      "Chicken",
+      "Berbere",
+      "Onion",
+      "Garlic",
+      "Egg"
+    ],
     "price": 350,
-    "image": "/images/doro_wat.jpg"
+    "image": "/images/doro_wat.jpg",
+    "available": true
   },
   {
     "id": "shiro",
     "name": "Shiro",
     "category": "Vegetarian",
     "description": "Creamy chickpea stew simmered with onions, garlic and berbere for a comforting vegetarian meal.",
-    "ingredients": ["Chickpeas", "Onion", "Garlic", "Berbere", "Spices"],
+    "ingredients": [
+      "Chickpeas",
+      "Onion",
+      "Garlic",
+      "Berbere",
+      "Spices"
+    ],
     "price": 280,
-    "image": "/images/shiro_bozena.jpg"
+    "image": "/images/shiro_bozena.jpg",
+    "available": true
   },
   {
     "id": "siga-key-wat",
     "name": "Siga Key Wat",
     "category": "Ethiopian",
     "description": "Tender beef stew infused with berbere and Ethiopian herbs, known for its bold and warming flavor.",
-    "ingredients": ["Beef", "Berbere", "Onion", "Garlic", "Ginger"],
+    "ingredients": [
+      "Beef",
+      "Berbere",
+      "Onion",
+      "Garlic",
+      "Ginger"
+    ],
     "price": 420,
-    "image": "/images/Siga_Key_Wat.jpg"
+    "image": "/images/Siga_Key_Wat.jpg",
+    "available": true
   },
   {
     "id": "beyaynetu",
     "name": "Beyaynetu",
     "category": "Ethiopian",
     "description": "A mixed platter of Ethiopian favorites featuring vegetables, lentils and flavorful sides.",
-    "ingredients": ["Injera", "Lentils", "Vegetables", "Meat", "Sides"],
+    "ingredients": [
+      "Injera",
+      "Lentils",
+      "Vegetables",
+      "Meat",
+      "Sides"
+    ],
     "price": 380,
-    "image": "/images/Beyaynetu.jpg"
+    "image": "/images/Beyaynetu.jpg",
+    "available": true
   },
   {
     "id": "pizza",
     "name": "Pizza",
     "category": "International",
     "description": "Freshly baked pizza with tomato sauce, mozzarella and a satisfying, oven-finished crust.",
-    "ingredients": ["Dough", "Tomato sauce", "Mozzarella", "Toppings"],
+    "ingredients": [
+      "Dough",
+      "Tomato sauce",
+      "Mozzarella",
+      "Toppings"
+    ],
     "price": 400,
-    "image": "/images/pizza.jpg"
+    "image": "/images/pizza.jpg",
+    "available": true
   },
   {
     "id": "baklava",
     "name": "Baklava",
     "category": "Dessert",
     "description": "Flaky layers of pastry with nuts and a sweet finish that pairs perfectly with coffee.",
-    "ingredients": ["Pastry", "Nuts", "Honey", "Butter"],
+    "ingredients": [
+      "Pastry",
+      "Nuts",
+      "Honey",
+      "Butter"
+    ],
     "price": 220,
-    "image": "/images/baklava.jpg"
+    "image": "/images/baklava.jpg",
+    "available": true
   },
   {
     "id": "coffee",
     "name": "Ethiopian Coffee",
     "category": "Drinks",
     "description": "Freshly roasted Ethiopian coffee brewed to bring out a smooth and vibrant cup.",
-    "ingredients": ["Coffee beans", "Water", "Sugar"],
+    "ingredients": [
+      "Coffee beans",
+      "Water",
+      "Sugar"
+    ],
     "price": 100,
-    "image": "/images/coffee.jpg"
+    "image": "/images/coffee.jpg",
+    "available": true
   }
 ]

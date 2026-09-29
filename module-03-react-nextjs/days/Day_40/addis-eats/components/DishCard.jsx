@@ -23,6 +23,9 @@ export function DishCard({ dish }) {
           <div className="p-5">
             <div className="mb-2 flex items-center justify-between gap-3">
               <span className="rounded-full bg-orange-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-orange-700">{dish.category}</span>
+              {dish.available === false && (
+                <span className="rounded-full bg-slate-200 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-slate-600">Sold out</span>
+              )}
               <span className="text-lg font-bold text-orange-600">{dish.price} ETB</span>
             </div>
             <h2 className="text-xl font-bold text-slate-900">{dish.name}</h2>
