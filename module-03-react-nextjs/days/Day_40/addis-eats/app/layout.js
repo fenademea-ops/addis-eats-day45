@@ -5,6 +5,9 @@ import "./globals.css";
 export const metadata = {
   title: "Addis Eats",
   description: "A food-ordering app for Ethiopian favorites and modern meals.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({ children }) {

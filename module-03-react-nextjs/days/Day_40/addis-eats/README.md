@@ -12,7 +12,7 @@
 ## Technologies
 
 - Next.js
-- React
+-
 - JavaScript
 - Tailwind CSS
 - Zod
